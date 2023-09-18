@@ -1,0 +1,46 @@
+.custom-nav {
+    background-color: #ff0000; /* Cambia "#ff0000" al color que desees */
+  }
+.custom-nav2{
+    background-color: aqua;
+    height: 10%;
+}
+
+.custom-nav3{
+    background-color: #fff;
+    height: 90%;
+}
+.container{
+  background-color:#EAEAEF;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 30px 30px 20px 30px;
+  height:fit-content;
+
+}
+.table-container {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    justify-content: center;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  .table-container th{
+    font-size: 16px;
+    font-family: Montesrrat, sans-serif;
+  }
+  .table-container tr{
+    font-size: 14px;
+    font-family: Montesrrat, sans-serif;
+  }
+  .table-container button{
+    background-color: #62a8ea;
+    border-color: #62a8ea;
+    font-size: 12px;
+    font-family: Montesrrat, sans-serif;
+  }
