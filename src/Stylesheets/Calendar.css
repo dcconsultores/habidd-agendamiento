@@ -1,0 +1,58 @@
+.fc-day-today {
+    background: #EAEAEF !important;
+}
+
+.container2{
+    background-color:#EAEAEF;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 15px;
+}
+.container3{
+    background-color:#fff;
+    margin: 20px;
+    padding: 10px;
+    font-family: Montserrat, sans-serif;
+    font-size: 20px;
+    font-weight: 200;
+}
+.custom-tittle{
+    text-align: left;
+    margin-bottom: 25px;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+}
+
+.custom-tittle h4{
+    font-size: 18px;
+    font-weight: bold;
+}
+ 
+.fc-col-header-cell-cushion, .fc-daygrid-day-number {
+    color: #37474f; 
+    text-decoration: none;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    font-weight: 200;
+    text-transform: uppercase;
+  }
+.fc .fc-toolbar{
+    margin-bottom: 150px;
+    justify-content: center;
+}
+.fc .fc-button{
+    background-color: #fff;
+    color: #000;
+    border: none;
+}
+#fc-dom-1388{
+    font-size: 20px;
+    font-family: Roboto, sans-serif;
+    font-weight: 300;
+    color: #37474f;
+    text-transform: capitalize;
+}
