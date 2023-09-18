@@ -39,7 +39,7 @@ function Services({ setServiceData }) {
 	return (
 		<div>
 			<Container fluid>
-				<Row className='p-5'>
+				<Row className='container1'>
 					<Col className='container'>
 						<Table className='table-container' responsive bordered striped>
 							<thead>

@@ -1,5 +1,8 @@
+.container1{
+  padding: 30px;
+}
 .custom-nav {
-    background-color: #ff0000; /* Cambia "#ff0000" al color que desees */
+    background-color: #ff0000; 
   }
 .custom-nav2{
     background-color: aqua;

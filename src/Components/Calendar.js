@@ -14,6 +14,7 @@ function Calendar({ serviceData }) {
 	const [appointments, setAppointments] = useState([]);
 	const [modalShow, setModalShow] = React.useState(false);
 	const [dueDate, setDueDate] = useState(null);
+	const [patients, setPatients] = useState([]);
 
 	const handleDateChangee = event => {
 		setDueDate(event.target.value);
@@ -33,6 +34,7 @@ function Calendar({ serviceData }) {
 	useEffect(() => {
 		fetchData();
 		fetchData2();
+		fetchData3();
 	}, []);
 
 	function fetchData() {
@@ -80,6 +82,30 @@ function Calendar({ serviceData }) {
 				console.error(error);
 			});
 	}
+
+	function fetchData3() {
+		const options = {
+			method: 'GET',
+			url: `https://test.habidd.com/api/scheduling/patients/list.php?institution=${1}`,
+		};
+		axios
+			.request(options)
+			.then(response => {
+				console.log(response.data);
+				return response;
+			})
+			.then(responseData => {
+				if (responseData && responseData.data.data) {
+					setPatients(responseData.data.data);
+				} else {
+					setPatients([]);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}
+
 	function ModalForm(props) {
 		return (
 			<Modal
@@ -119,9 +145,10 @@ function Calendar({ serviceData }) {
 							<Form.Label>Paciente</Form.Label>
 							<Form.Select>
 								<option value='blanco'> </option>
-								{appointments.map((opcion, index) => (
+								{patients.map((opcion, index) => (
 									<option key={index} value={opcion}>
-										{opcion.id}
+										{opcion.nameFirst} {opcion.nameSecond} {opcion.surnameFirst}{' '}
+										{opcion.surnameSecond}
 									</option>
 								))}
 							</Form.Select>
@@ -149,7 +176,7 @@ function Calendar({ serviceData }) {
 	return (
 		<div>
 			<Container fluid>
-				<Row className=' p-5 m-0'>
+				<Row className='container1'>
 					<Col className='container2'>
 						<Col className='container3'>
 							<Row className='custom-tittle'>
