@@ -1,6 +1,26 @@
+.custom-nav {
+    background-color: #3b1b4f; /* Cambia "#ff0000" al color que desees */
+    display: flex;
+    min-height: 100vh;
+    overflow: hidden;
+    top: 0;
+    font-family: 'Montserrat', sans-serif;
+   /* background-image: url("https://test.habidd.com/themes/standardsalud/images/sidebar-footer-arch@2x.png");*/
+}
 .fc-day-today {
     background: #EAEAEF !important;
 }
+.calendar{
+    font-family: 'Montserrat', sans-serif;
+}
+.custom-nav2{
+    background-color: #7c2c8c;
+    height: 10%;
+    padding: 15px;
+}
+
+
+ 
 
 .container2{
     background-color:#EAEAEF;
@@ -20,27 +40,51 @@
     font-size: 20px;
     font-weight: 200;
 }
+
+.custom-event p{
+    margin: 0px;
+}
+  .custom-event1{
+    padding: 5px; /* Añade espacio interno al evento */
+
+    height: 90px;
+    border-radius: 10px; /* Añade bordes redondeados al evento */
+    font-size: 11.9px;
+    font-family: 'Montserrat', sans-serif;
+    /* Otros estilos personalizados según tus preferencias */
+  }
+  .custom-event2 {
+    padding: 5px; /* Añade espacio interno al evento */
+    height: 100px;
+    border-radius: 10px; /* Añade bordes redondeados al evento */
+    font-size: 11.9px;
+    font-family: 'Montserrat', sans-serif;
+    /* Otros estilos personalizados según tus preferencias */
+  }
 .custom-tittle{
     text-align: left;
     margin-bottom: 25px;
     font-family: Montserrat, sans-serif;
-    font-size: 14px;
 }
 
 .custom-tittle h4{
     font-size: 18px;
     font-weight: bold;
 }
- 
+  
+.custom-tittle p{
+    font-size: 14px;
+}
+  
 .fc-col-header-cell-cushion, .fc-daygrid-day-number {
-    color: #37474f; 
+    color: #37474f; /* Reemplaza "tu-color-deseado" con el color que prefieras */
     text-decoration: none;
     font-family: Montserrat, sans-serif;
     font-size: 14px;
     font-weight: 200;
     text-transform: uppercase;
   }
-.fc .fc-toolbar{
+  .fc .fc-toolbar{
     margin-bottom: 150px;
     justify-content: center;
 }
