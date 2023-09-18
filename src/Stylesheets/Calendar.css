@@ -1,27 +1,3 @@
-.custom-nav {
-    background-color: #3b1b4f; /* Cambia "#ff0000" al color que desees */
-    display: flex;
-    min-height: 100vh;
-    overflow: hidden;
-    top: 0;
-    font-family: 'Montserrat', sans-serif;
-   /* background-image: url("https://test.habidd.com/themes/standardsalud/images/sidebar-footer-arch@2x.png");*/
-}
-.fc-day-today {
-    background: #EAEAEF !important;
-}
-.calendar{
-    font-family: 'Montserrat', sans-serif;
-}
-.custom-nav2{
-    background-color: #7c2c8c;
-    height: 10%;
-    padding: 15px;
-}
-
-
- 
-
 .container2{
     background-color:#EAEAEF;
     margin-left: auto;
@@ -40,27 +16,6 @@
     font-size: 20px;
     font-weight: 200;
 }
-
-.custom-event p{
-    margin: 0px;
-}
-  .custom-event1{
-    padding: 5px; /* Añade espacio interno al evento */
-
-    height: 90px;
-    border-radius: 10px; /* Añade bordes redondeados al evento */
-    font-size: 11.9px;
-    font-family: 'Montserrat', sans-serif;
-    /* Otros estilos personalizados según tus preferencias */
-  }
-  .custom-event2 {
-    padding: 5px; /* Añade espacio interno al evento */
-    height: 100px;
-    border-radius: 10px; /* Añade bordes redondeados al evento */
-    font-size: 11.9px;
-    font-family: 'Montserrat', sans-serif;
-    /* Otros estilos personalizados según tus preferencias */
-  }
 .custom-tittle{
     text-align: left;
     margin-bottom: 25px;
@@ -77,14 +32,14 @@
 }
   
 .fc-col-header-cell-cushion, .fc-daygrid-day-number {
-    color: #37474f; /* Reemplaza "tu-color-deseado" con el color que prefieras */
+    color: #37474f; 
     text-decoration: none;
     font-family: Montserrat, sans-serif;
     font-size: 14px;
     font-weight: 200;
     text-transform: uppercase;
-  }
-  .fc .fc-toolbar{
+}
+.fc .fc-toolbar{
     margin-bottom: 150px;
     justify-content: center;
 }
@@ -99,4 +54,74 @@
     font-weight: 300;
     color: #37474f;
     text-transform: capitalize;
+}
+.fc-day-today {
+    background: #EAEAEF !important;
+}
+
+.custom-event {
+    padding: 0px 1px; 
+    border-radius: 10px; 
+    font-size: 11.9px;
+    font-family: 'Montserrat', sans-serif;
+  }
+.custom-event p{
+    margin: 0px;
+}
+.custom-event1{
+    padding: 5px; 
+    height: 90px;
+    border-radius: 10px; 
+    font-size: 11.9px;
+    font-family: 'Montserrat', sans-serif;
+
+}
+.custom-event2 {
+    padding: 5px; 
+    height: 100px;
+    border-radius: 10px; 
+    font-size: 11.9px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.modal .modal-header,
+.modal .modal-footer {
+  border: none; 
+}
+.modal .modal-footer{
+  padding-top: 0;
+  margin-bottom: 10px;
+}
+.modal .modal-body{
+  padding: 20px;
+}
+
+.form-modal{
+  background-color: #EAEAEF;
+  padding: 20px;
+  border-radius: 10px;
+}
+ 
+.modal .modal-lg{
+    --bs-modal-width: 600px;
+}
+
+.modal .modal-footer button{
+    border-radius: 30px;
+    width: 100px;
+    height: 50px;
+    font-family: Montserrat, sans-serif;
+    font-size: 19px;
+}
+
+.modal .modal-footer .closeButton{
+    color: #FF4445;
+    background-color: #fff;
+    border-color: #FF4445;
+}
+
+.modal .modal-footer .registerButton{
+    background-color: #FF4445;
+    border-color: #FF4445;
+    color: #fff;
 }
