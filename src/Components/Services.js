@@ -5,9 +5,7 @@ import '../Stylesheets/Services.css';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-function Services({ setServiceData }) {
-	const [service, setService] = useState([]);
-
+function Services({ setServiceData, service, setService }) {
 	useEffect(() => {
 		fetchData();
 	}, []);
@@ -67,6 +65,13 @@ function Services({ setServiceData }) {
 								))}
 							</tbody>
 						</Table>
+						<Col>
+							<Link to={`/calendarAllServices`}>
+								<Button onClick={() => console.log(service)}>
+									Todos los servicios
+								</Button>
+							</Link>
+						</Col>
 					</Col>
 				</Row>
 			</Container>
@@ -76,6 +81,8 @@ function Services({ setServiceData }) {
 
 Services.propTypes = {
 	setServiceData: PropTypes.any,
+	service: PropTypes.any,
+	setService: PropTypes.any,
 };
 
 export default Services;

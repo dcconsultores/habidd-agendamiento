@@ -45,7 +45,7 @@
 }
 .fc .fc-toolbar {
 	margin-bottom: 150px;
-	justify-content: center !important;
+	justify-content: space-between !important;
 }
 .fc .fc-button {
 	background-color: #fff;

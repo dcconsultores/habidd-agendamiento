@@ -146,8 +146,8 @@ function Calendar({ serviceData }) {
 							<Form.Select>
 								<option value='blanco'> </option>
 								{patients.map((opcion, index) => (
-									<option key={index} value={opcion}>
-										{opcion.nameFirst} {opcion.nameSecond} {opcion.surnameFirst}{' '}
+									<option key={opcion.nameSecondindex} value={opcion}>
+										{opcion.nameFirst} {} {opcion.surnameFirst}{' '}
 										{opcion.surnameSecond}
 									</option>
 								))}
@@ -200,7 +200,6 @@ function Calendar({ serviceData }) {
 									...hollidays.map((item, index) => ({
 										title: 'CERRADO',
 										date: item.date,
-										describe: 'HOO',
 										color: '#F2A654',
 										className: 'custom-event1',
 									})),
@@ -227,7 +226,7 @@ function Calendar({ serviceData }) {
 											<p>
 												<strong>{arg.timeText}</strong>
 											</p>
-											<p>{arg.event.title}</p>
+											<p>{arg.event.title}</p> {/* CREAR ESTADO */}
 										</div>
 									);
 								}}
