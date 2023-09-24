@@ -82,7 +82,7 @@ function CalendarAllServices({ service }) {
 								headerToolbar={{
 									left: 'prev,next',
 									center: 'title',
-									right: ' ',
+									right: 'dayGridWeek,dayGridDay',
 								}}
 								aspectRatio={2}
 								events={[
