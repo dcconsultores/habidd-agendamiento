@@ -16,7 +16,30 @@ function Calendar({ serviceData }) {
 	const [dueDate, setDueDate] = useState(null);
 	const [patients, setPatients] = useState([]);
 	const [selectedPatient, setSelectedPatient] = useState('');
+	const [dateOfBirth, setDateOfBirth] = useState(''); // Estado para rastrear la fecha de nacimiento
 
+	const handleDateOfBirthChange = event => {
+		setDateOfBirth(event.target.value); // Actualizar la fecha de nacimiento cuando cambia
+	};
+
+	const calculateAge = dateOfBirth => {
+		// Calcular la edad a partir de la fecha de nacimiento
+		const today = new Date();
+		const birthDate = new Date(dateOfBirth);
+		let age = today.getFullYear() - birthDate.getFullYear();
+
+		// Ajustar la edad si el cumpleaños aún no ha ocurrido este año
+		const monthDiff = today.getMonth() - birthDate.getMonth();
+		if (
+			monthDiff < 0 ||
+			(monthDiff === 0 && today.getDate() < birthDate.getDate())
+		) {
+			age--;
+		}
+
+		return age;
+	};
+	const age = calculateAge(dateOfBirth);
 	const handleDateChangee = event => {
 		setDueDate(event.target.value);
 		event.preventDefault();
@@ -202,6 +225,21 @@ function Calendar({ serviceData }) {
 									<Form.Group as={Col} controlId='formGroupDocument'>
 										<Form.Label>Documento de Identificación</Form.Label>
 										<Form.Control placeholder='Documento' />
+									</Form.Group>
+								</Row>
+								<Row className='mb-3'>
+									<Form.Group as={Col} controlId='formGroupDateOfBirth'>
+										<Form.Label>Fecha de nacimiento</Form.Label>
+										<Form.Control
+											type='date'
+											value={dateOfBirth}
+											onChange={handleDateOfBirthChange}
+										/>
+									</Form.Group>
+
+									<Form.Group as={Col} controlId='formGroupAge'>
+										<Form.Label>Edad</Form.Label>
+										<Form.Control type='text' value={age + ' años'} readOnly />
 									</Form.Group>
 								</Row>
 							</>
