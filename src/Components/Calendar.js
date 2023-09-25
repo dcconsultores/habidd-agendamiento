@@ -242,6 +242,16 @@ function Calendar({ serviceData }) {
 										<Form.Control type='text' value={age + ' años'} readOnly />
 									</Form.Group>
 								</Row>
+								<Row className='mb-3'>
+									<Form.Group as={Col} controlId='formGroupPhoneNumber'>
+										<Form.Label>Teléfono Celular</Form.Label>
+										<Form.Control placeholder='Teléfono celular' />
+									</Form.Group>
+									<Form.Group as={Col} controlId='formGroupEmail'>
+										<Form.Label>Email</Form.Label>
+										<Form.Control type='email' placeholder='Email' />
+									</Form.Group>
+								</Row>
 							</>
 						)}
 						<Form.Group className='mb-3' controlId='formGroupReason'>
