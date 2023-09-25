@@ -12,15 +12,20 @@ import PropTypes from 'prop-types';
 function Calendar({ serviceData }) {
 	const [hollidays, setHollidays] = useState([]);
 	const [appointments, setAppointments] = useState([]);
-	const [modalShow, setModalShow] = React.useState(false);
+	const [modalShow, setModalShow] = useState(false);
 	const [dueDate, setDueDate] = useState(null);
 	const [patients, setPatients] = useState([]);
+	const [selectedPatient, setSelectedPatient] = useState('');
 
 	const handleDateChangee = event => {
 		setDueDate(event.target.value);
 		event.preventDefault();
 	};
 
+	const handlePatientChange = event => {
+		setSelectedPatient(event.target.value); // Actualizar el estado cuando cambia la selección
+		event.preventDefault();
+	};
 	const handleDateClick = arg => {
 		const fecha = arg.date;
 		const dia = fecha.getDate().toString().padStart(2, '0');
@@ -133,6 +138,7 @@ function Calendar({ serviceData }) {
 							<Form.Control
 								type='date'
 								placeholder='Due date'
+								defaultValue={dueDate}
 								value={dueDate}
 								onChange={handleDateChangee}
 							/>
@@ -143,7 +149,10 @@ function Calendar({ serviceData }) {
 						</Form.Group>
 						<Form.Group className='mb-3' controlId='formGroupPatient'>
 							<Form.Label>Paciente</Form.Label>
-							<Form.Select>
+							<Form.Select
+								value={selectedPatient}
+								onChange={handlePatientChange}
+							>
 								<option value='blanco'> </option>
 								{patients.map((opcion, index) => (
 									<option key={opcion.nameSecondindex} value={opcion}>
@@ -151,8 +160,52 @@ function Calendar({ serviceData }) {
 										{opcion.surnameSecond}
 									</option>
 								))}
+								<option value='nuevoPaciente'>Nuevo paciente</option>
 							</Form.Select>
 						</Form.Group>
+						{/* Nombre del paciente: se muestra solo si se selecciona 'Nuevo paciente' */}
+						{selectedPatient === 'nuevoPaciente' && (
+							<>
+								<Form.Group className='mb-3' controlId='formGroupPatientName'>
+									<Form.Label>Nombre del paciente</Form.Label>
+									<Form.Control placeholder='Nombre(s)' />
+								</Form.Group>
+								{/* Apellido del paciente: se muestra solo si se selecciona 'Nuevo paciente' */}
+								<Form.Group
+									className='mb-3'
+									controlId='formGroupPatientLastName'
+								>
+									<Form.Label>Apellido del paciente</Form.Label>
+									<Form.Control placeholder='Apellido(s)' />
+								</Form.Group>
+								<Row className='mb-3'>
+									<Form.Group as={Col} controlId='formGroupTypeDocument'>
+										<Form.Label>Tipo de Documento</Form.Label>
+										<Form.Select>
+											<option value='blanco'> </option>
+											<option value='cc'>Cédula de ciudadanía</option>
+											<option value='ce'>Cédula de extranjería</option>
+											<option value='cd'>Carnet diplomático</option>
+											<option value='p'>Pasaporte</option>
+											<option value='s'>Salvoconucto</option>
+											<option value='pep'>
+												Permiso Especial de Permanencia
+											</option>
+											<option value='rc'>Registro civil</option>
+											<option value='ti'>Tarjeta de identidad</option>
+											<option value='cnv'>Certificiado de nacido vivo</option>
+											<option value='ai'>Adulto sin identificar</option>
+											<option value='mi'>Menor sin identificar</option>
+										</Form.Select>
+									</Form.Group>
+
+									<Form.Group as={Col} controlId='formGroupDocument'>
+										<Form.Label>Documento de Identificación</Form.Label>
+										<Form.Control placeholder='Documento' />
+									</Form.Group>
+								</Row>
+							</>
+						)}
 						<Form.Group className='mb-3' controlId='formGroupReason'>
 							<Form.Label>Motivo de consulta</Form.Label>
 							<Form.Control as='textArea' placeholder='Motivo' />
