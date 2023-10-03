@@ -8,7 +8,7 @@ import axios from 'axios';
 import esLocale from '@fullcalendar/core/locales/es';
 import Modal from 'react-bootstrap/Modal';
 import PropTypes from 'prop-types';
-
+import { format } from 'date-fns';
 function Calendar({ serviceData }) {
 	const [hollidays, setHollidays] = useState([]);
 	const [appointments, setAppointments] = useState([]);
@@ -16,12 +16,42 @@ function Calendar({ serviceData }) {
 	const [dueDate, setDueDate] = useState(null);
 	const [patients, setPatients] = useState([]);
 	const [selectedPatient, setSelectedPatient] = useState('');
-	const [dateOfBirth, setDateOfBirth] = useState(''); // Estado para rastrear la fecha de nacimiento
+	const [dateOfBirth, setDateOfBirth] = useState('');
+	const [reason, setReason] = useState('');
+	const [selectedTime, setSelectedTime] = useState('');
+	const [name, setName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [documentType, setDocumentType] = useState('');
+	const [document, setDocument] = useState('');
+	const [phoneNumber, setPhoneNumber] = useState('');
+	const [email, setEmail] = useState('');
+	const [status, setStatus] = useState('new');
 
+	const defaultValues = event => {
+		setDueDate(null);
+		setSelectedPatient('');
+		setDateOfBirth('');
+		setReason('');
+		setSelectedTime('');
+		setName('');
+		setLastName('');
+		setDocumentType('');
+		setDocument('');
+		setPhoneNumber('');
+		setEmail('');
+		setStatus('new');
+	};
 	const handleDateOfBirthChange = event => {
-		setDateOfBirth(event.target.value); // Actualizar la fecha de nacimiento cuando cambia
+		setDateOfBirth(event.target.value);
+	};
+	const handleTimeChange = e => {
+		setSelectedTime(e.target.value);
 	};
 
+	const handleReason = e => {
+		console.log(reason);
+		setReason(e.target.value);
+	};
 	const calculateAge = dateOfBirth => {
 		// Calcular la edad a partir de la fecha de nacimiento
 		const today = new Date();
@@ -50,16 +80,21 @@ function Calendar({ serviceData }) {
 		event.preventDefault();
 	};
 	const handleDateClick = arg => {
-		const fecha = arg.date;
-		const dia = fecha.getDate().toString().padStart(2, '0');
-		const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-		const año = fecha.getFullYear();
-		const fechaFormateada = `${año}-${mes}-${dia}`;
-		setModalShow(true);
-		setDueDate(fechaFormateada);
+		const fechaFormateada = format(arg.date, 'yyyy-MM-dd');
+		console.log(fechaFormateada);
+		const fechaActual = format(new Date(), 'yyyy-MM-dd'); // Obtener la fecha actual
+		console.log(fechaActual);
+		if (fechaFormateada < fechaActual) {
+			alert('La fecha seleccionada ya ha pasado.');
+		} else {
+			defaultValues();
+			setModalShow(true);
+			setDueDate(fechaFormateada);
+		}
 	};
 
 	useEffect(() => {
+		console.log(serviceData);
 		fetchData();
 		fetchData2();
 		fetchData3();
@@ -96,12 +131,12 @@ function Calendar({ serviceData }) {
 		axios
 			.request(options)
 			.then(response => {
-				console.log(response.data);
+				console.log(response.data.data);
 				return response;
 			})
 			.then(responseData => {
 				if (responseData && responseData.data) {
-					setAppointments(responseData.data.results);
+					setAppointments(responseData.data.data);
 				} else {
 					setAppointments([]);
 				}
@@ -134,145 +169,80 @@ function Calendar({ serviceData }) {
 			});
 	}
 
-	function ModalForm(props) {
-		return (
-			<Modal
-				{...props}
-				size='lg'
-				aria-labelledby='contained-modal-title-vcenter'
-				centered
-				className='modal'
-			>
-				<Modal.Header closeButton>
-					<Modal.Title id='contained-modal-title-vcenter'>
-						Solicitud de cita
-					</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<Form className='form-modal'>
-						<Form.Group className='mb-3' controlId='formGrouService'>
-							<Form.Label>Servicio</Form.Label>
-							<p>
-								{serviceData.code} - {serviceData.name}
-							</p>
-						</Form.Group>
-						<Form.Group className='mb-3' controlId='formGroupDate'>
-							<Form.Label>Fecha</Form.Label>
-							<Form.Control
-								type='date'
-								placeholder='Due date'
-								defaultValue={dueDate}
-								value={dueDate}
-								onChange={handleDateChangee}
-							/>
-						</Form.Group>
-						<Form.Group className='mb-3' controlId='formGroupTime'>
-							<Form.Label>Hora</Form.Label>
-							<Form.Control type='time' placeholder='Hora' />
-						</Form.Group>
-						<Form.Group className='mb-3' controlId='formGroupPatient'>
-							<Form.Label>Paciente</Form.Label>
-							<Form.Select
-								value={selectedPatient}
-								onChange={handlePatientChange}
-							>
-								<option value='blanco'> </option>
-								{patients.map((opcion, index) => (
-									<option key={opcion.nameSecondindex} value={opcion}>
-										{opcion.nameFirst} {} {opcion.surnameFirst}{' '}
-										{opcion.surnameSecond}
-									</option>
-								))}
-								<option value='nuevoPaciente'>Nuevo paciente</option>
-							</Form.Select>
-						</Form.Group>
-						{/* Nombre del paciente: se muestra solo si se selecciona 'Nuevo paciente' */}
-						{selectedPatient === 'nuevoPaciente' && (
-							<>
-								<Form.Group className='mb-3' controlId='formGroupPatientName'>
-									<Form.Label>Nombre del paciente</Form.Label>
-									<Form.Control placeholder='Nombre(s)' />
-								</Form.Group>
-								{/* Apellido del paciente: se muestra solo si se selecciona 'Nuevo paciente' */}
-								<Form.Group
-									className='mb-3'
-									controlId='formGroupPatientLastName'
-								>
-									<Form.Label>Apellido del paciente</Form.Label>
-									<Form.Control placeholder='Apellido(s)' />
-								</Form.Group>
-								<Row className='mb-3'>
-									<Form.Group as={Col} controlId='formGroupTypeDocument'>
-										<Form.Label>Tipo de Documento</Form.Label>
-										<Form.Select>
-											<option value='blanco'> </option>
-											<option value='cc'>Cédula de ciudadanía</option>
-											<option value='ce'>Cédula de extranjería</option>
-											<option value='cd'>Carnet diplomático</option>
-											<option value='p'>Pasaporte</option>
-											<option value='s'>Salvoconucto</option>
-											<option value='pep'>
-												Permiso Especial de Permanencia
-											</option>
-											<option value='rc'>Registro civil</option>
-											<option value='ti'>Tarjeta de identidad</option>
-											<option value='cnv'>Certificiado de nacido vivo</option>
-											<option value='ai'>Adulto sin identificar</option>
-											<option value='mi'>Menor sin identificar</option>
-										</Form.Select>
-									</Form.Group>
-
-									<Form.Group as={Col} controlId='formGroupDocument'>
-										<Form.Label>Documento de Identificación</Form.Label>
-										<Form.Control placeholder='Documento' />
-									</Form.Group>
-								</Row>
-								<Row className='mb-3'>
-									<Form.Group as={Col} controlId='formGroupDateOfBirth'>
-										<Form.Label>Fecha de nacimiento</Form.Label>
-										<Form.Control
-											type='date'
-											value={dateOfBirth}
-											onChange={handleDateOfBirthChange}
-										/>
-									</Form.Group>
-
-									<Form.Group as={Col} controlId='formGroupAge'>
-										<Form.Label>Edad</Form.Label>
-										<Form.Control type='text' value={age + ' años'} readOnly />
-									</Form.Group>
-								</Row>
-								<Row className='mb-3'>
-									<Form.Group as={Col} controlId='formGroupPhoneNumber'>
-										<Form.Label>Teléfono Celular</Form.Label>
-										<Form.Control placeholder='Teléfono celular' />
-									</Form.Group>
-									<Form.Group as={Col} controlId='formGroupEmail'>
-										<Form.Label>Email</Form.Label>
-										<Form.Control type='email' placeholder='Email' />
-									</Form.Group>
-								</Row>
-							</>
-						)}
-						<Form.Group className='mb-3' controlId='formGroupReason'>
-							<Form.Label>Motivo de consulta</Form.Label>
-							<Form.Control as='textArea' placeholder='Motivo' />
-						</Form.Group>
-					</Form>
-				</Modal.Body>
-				<Modal.Footer>
-					{/* eslint-disable-next-line react/prop-types */}
-					<Button className='closeButton' onClick={props.onHide}>
-						Cerrar
-					</Button>
-					{/* eslint-disable-next-line react/prop-types */}
-					<Button className='registerButton' onClick={props.onHide}>
-						Registro
-					</Button>
-				</Modal.Footer>
-			</Modal>
-		);
-	}
+	const handleSubmit = e => {
+		e.preventDefault();
+		console.log(dueDate);
+		console.log(selectedTime);
+		const formData = {
+			institution: 1,
+			idType: 'cc', // Tipo de documento de identidad
+			idNumber: '123456789', // Número de documento de identidad
+			nameFirst: 'Juan', // Primer nombre del paciente
+			nameSecond: 'Pérez', // Segundo nombre del paciente
+			surnameFirst: 'González', // Primer apellido del paciente
+			surnameSecond: 'López', // Segundo apellido del paciente
+			birthday: '1990-01-15', // Fecha de nacimiento en formato YYYY-MM-DD
+			phoneNumberMobile: '1234567890', // Número de teléfono móvil (opcional)
+			email: 'juan@example.com', // Correo electrónico del paciente (opcional)
+		};
+		const appointmentData = {
+			institution: 1,
+			service: 1,
+			patient: 1,
+			date: '2023-01-01',
+			hour: '14:00:00',
+			duration: 30,
+			notes: 'Nota opcional de la cita',
+		};
+		if (selectedPatient === 'nuevoPaciente') {
+			axios
+				.post(
+					'https://test.habidd.com/api/scheduling/patients/create.php?institution=1',
+					formData,
+				)
+				.then(response => {
+					console.log('Solicitud exitosa', response.data);
+					setModalShow(false);
+					console.log('PACIENTE CREADO');
+				})
+				.catch(error => {
+					console.error('Error en la solicitud', error);
+					setModalShow(false);
+					console.log('PACIENTE CREADO');
+				});
+			axios
+				.post(
+					'https://test.habidd.com/api/scheduling/appointments/create.php?institution=1&service=1',
+					appointmentData,
+				)
+				.then(response => {
+					console.log('Respuesta exitosa:', response.data);
+					console.log('CITA CREADO');
+					setModalShow(false);
+				})
+				.catch(error => {
+					console.error('Error en la solicitud:', error);
+					console.log('CITA CREADO');
+					setModalShow(false);
+				});
+		} else {
+			axios
+				.post(
+					'https://test.habidd.com/api/scheduling/appointments/create.php?institution=1&service=1',
+					appointmentData,
+				)
+				.then(response => {
+					console.log('Respuesta exitosa:', response.data);
+					console.log('CITA CREADO');
+					setModalShow(false);
+				})
+				.catch(error => {
+					console.error('Error en la solicitud:', error);
+					console.log('CITA CREADO');
+					setModalShow(false);
+				});
+		}
+	};
 
 	return (
 		<div>
@@ -283,7 +253,8 @@ function Calendar({ serviceData }) {
 							<Row className='custom-tittle'>
 								<h4>Servicio solicitado</h4>
 								<p>
-									{serviceData.code} - {serviceData.name}
+									{serviceData.service.code} - {serviceData.service.name} -{' '}
+									{serviceData.selectedProfessional}
 								</p>
 							</Row>
 							<FullCalendar
@@ -309,6 +280,7 @@ function Calendar({ serviceData }) {
 										date: `${item.date}T${item.timeStart}`,
 										display: 'block',
 										color: '#54728c',
+										array: item,
 										className: 'custom-event2',
 									})),
 								]}
@@ -336,7 +308,204 @@ function Calendar({ serviceData }) {
 					</Col>
 				</Row>
 			</Container>
-			<ModalForm show={modalShow} onHide={() => setModalShow(false)} />
+			<Modal
+				show={modalShow}
+				onHide={() => setModalShow(false)}
+				size='lg'
+				aria-labelledby='contained-modal-title-vcenter'
+				centered
+				className='modal'
+			>
+				<Modal.Header closeButton>
+					<Modal.Title id='contained-modal-title-vcenter'>
+						Solicitud de cita
+					</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<Form onSubmit={handleSubmit}>
+						<Row className='form-modal'>
+							<Form.Group className='mb-3' controlId='formGrouService' change>
+								<Form.Label>Servicio</Form.Label>
+								<p>
+									{serviceData.code} - {serviceData.name}
+								</p>
+							</Form.Group>
+							<Form.Group className='mb-3' controlId='formGroupDate'>
+								<Form.Label>Fecha</Form.Label>
+								<Form.Control
+									type='date'
+									placeholder='Due date'
+									defaultValue={dueDate}
+									onChange={handleDateChangee}
+								/>
+							</Form.Group>
+							<Form.Group className='mb-3' controlId='formGroupTime'>
+								<Form.Label>Hora</Form.Label>
+								<Form.Control
+									type='time'
+									placeholder='Hora'
+									value={selectedTime}
+									onChange={handleTimeChange}
+								/>
+							</Form.Group>
+							<Form.Group className='mb-3' controlId='formGroupPatient'>
+								<Form.Label>Paciente</Form.Label>
+								{status === 'exist' ? (
+									<Form.Control
+										type='text'
+										value={selectedPatient}
+										readOnly
+										className='read-only'
+									/>
+								) : (
+									<Form.Select
+										value={selectedPatient}
+										onChange={handlePatientChange}
+									>
+										<option value='blanco'> </option>
+										{patients.map((opcion, index) => (
+											<option key={opcion.id} value={opcion}>
+												{opcion.nameFirst} {opcion.nameSecond}{' '}
+												{opcion.surnameFirst} {opcion.surnameSecond}
+											</option>
+										))}
+										<option value='nuevoPaciente'>Nuevo paciente</option>
+									</Form.Select>
+								)}
+							</Form.Group>
+							{/* Nombre del paciente: se muestra solo si se selecciona 'Nuevo paciente' */}
+							{selectedPatient === 'nuevoPaciente' && (
+								<>
+									<Form.Group className='mb-3' controlId='formGroupPatientName'>
+										<Form.Label>Nombre del paciente</Form.Label>
+										<Form.Control
+											placeholder='Nombre(s)'
+											value={name}
+											onChange={e => setName(e.target.value)}
+										/>
+									</Form.Group>
+									{/* Apellido del paciente: se muestra solo si se selecciona 'Nuevo paciente' */}
+									<Form.Group
+										className='mb-3'
+										controlId='formGroupPatientLastName'
+									>
+										<Form.Label>Apellido del paciente</Form.Label>
+										<Form.Control
+											placeholder='Apellido(s)'
+											value={lastName}
+											onChange={e => setLastName(e.target.value)}
+										/>
+									</Form.Group>
+									<Row className='mb-3'>
+										<Form.Group as={Col} controlId='formGroupTypeDocument'>
+											<Form.Label>Tipo de Documento</Form.Label>
+											<Form.Select
+												value={documentType}
+												onChange={e => setDocumentType(e.target.value)}
+											>
+												<option value='blanco'> </option>
+												<option value='cc'>Cédula de ciudadanía</option>
+												<option value='ce'>Cédula de extranjería</option>
+												<option value='cd'>Carnet diplomático</option>
+												<option value='p'>Pasaporte</option>
+												<option value='s'>Salvoconucto</option>
+												<option value='pep'>
+													Permiso Especial de Permanencia
+												</option>
+												<option value='rc'>Registro civil</option>
+												<option value='ti'>Tarjeta de identidad</option>
+												<option value='cnv'>Certificiado de nacido vivo</option>
+												<option value='ai'>Adulto sin identificar</option>
+												<option value='mi'>Menor sin identificar</option>
+											</Form.Select>
+										</Form.Group>
+
+										<Form.Group as={Col} controlId='formGroupDocument'>
+											<Form.Label>Documento de Identificación</Form.Label>
+											<Form.Control
+												placeholder='Documento'
+												value={document}
+												onChange={e => setDocument(e.target.value)}
+											/>
+										</Form.Group>
+									</Row>
+									<Row className='mb-3'>
+										<Form.Group as={Col} controlId='formGroupDateOfBirth'>
+											<Form.Label>Fecha de nacimiento</Form.Label>
+											<Form.Control
+												type='date'
+												value={dateOfBirth}
+												onChange={handleDateOfBirthChange}
+											/>
+										</Form.Group>
+
+										<Form.Group as={Col} controlId='formGroupAge'>
+											<Form.Label>Edad</Form.Label>
+											<Form.Control
+												type='text'
+												value={age + ' años'}
+												readOnly
+												className='read-only'
+											/>
+										</Form.Group>
+									</Row>
+									<Row className='mb-3'>
+										<Form.Group as={Col} controlId='formGroupPhoneNumber'>
+											<Form.Label>Teléfono Celular</Form.Label>
+											<Form.Control
+												placeholder='Teléfono celular'
+												value={phoneNumber}
+												onChange={e => setPhoneNumber(e.target.value)}
+											/>
+										</Form.Group>
+										<Form.Group as={Col} controlId='formGroupEmail'>
+											<Form.Label>Email</Form.Label>
+											<Form.Control
+												type='email'
+												placeholder='Email'
+												value={email}
+												onChange={e => setEmail(e.target.value)}
+											/>
+										</Form.Group>
+									</Row>
+								</>
+							)}
+							<Form.Group className='mb-3' controlId='formGroupReason'>
+								<Form.Label>Motivo de consulta</Form.Label>
+								{status === 'exist' ? (
+									<Form.Control
+										as='textarea'
+										value={reason}
+										readOnly
+										className='read-only'
+									/>
+								) : (
+									<Form.Control
+										as='textarea'
+										placeholder='Motivo'
+										value={reason}
+										onChange={handleReason}
+									/>
+								)}
+							</Form.Group>
+						</Row>
+						<Row className='modal-footer'>
+							<Button
+								className='closeButton'
+								onClick={() => {
+									setModalShow(false);
+									setStatus('new');
+								}}
+							>
+								Cerrar
+							</Button>
+							<Button type='submit' className='registerButton'>
+								Registrar
+							</Button>
+						</Row>
+					</Form>
+				</Modal.Body>
+			</Modal>
 		</div>
 	);
 }

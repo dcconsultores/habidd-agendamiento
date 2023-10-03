@@ -14,9 +14,11 @@ function CalendarAllServices({ service }) {
 
 	useEffect(() => {
 		fetchData();
+		console.log(service);
 		// Llamar a fetchData2 para cada servicio
 		service.map(item => fetchData2(item.id, item.name));
-	}, []); // Agregar 'service' como dependencia para que se actualice cuando cambie
+		console.log(allAppointments);
+	}, [service]);
 
 	function fetchData() {
 		const options = {
@@ -45,9 +47,9 @@ function CalendarAllServices({ service }) {
 		axios
 			.request(options)
 			.then(response => {
-				if (response.data && response.data.results) {
+				if (response.data && response.data.data) {
 					// Agregar el nombre del servicio a cada appointment y luego agregarlos al estado
-					const appointmentsWithServiceName = response.data.results.map(
+					const appointmentsWithServiceName = response.data.data.map(
 						appointment => ({
 							...appointment,
 							serviceName,
@@ -58,7 +60,8 @@ function CalendarAllServices({ service }) {
 						...appointmentsWithServiceName,
 					]);
 				}
-				console.log(allAppointments);
+				console.log(serviceId);
+				console.log(response.data.results);
 			})
 			.catch(error => {
 				console.error(error);
