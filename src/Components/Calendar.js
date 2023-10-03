@@ -196,6 +196,29 @@ function Calendar({ serviceData }) {
 			});
 	}
 
+	const handleConfirmAppointment = () => {
+		const params = {
+			institution: 1,
+			service: 1,
+			id: { idAppointment },
+			status: 'confirmed',
+		};
+		axios
+			.put(
+				'https://test.habidd.com/api/scheduling/appointments/edit.php',
+				params,
+			)
+			.then(response => {
+				console.log('Solicitud PUT exitosa:', response.data);
+				setModalShow(false);
+				console.log('CITA CONFIRMADA');
+			})
+			.catch(error => {
+				console.error('Error en la solicitud PUT:', error);
+				setModalShow(false);
+				console.log('CITA CONFIRMADA');
+			});
+	};
 	const handleEditAppointment = () => {
 		const dataToUpdate = {
 			institution: 1,
@@ -558,6 +581,15 @@ function Calendar({ serviceData }) {
 								</Button>
 							) : (
 								<>
+									<Button
+										type='button'
+										className='closeButton'
+										onClick={() => {
+											handleConfirmAppointment();
+										}}
+									>
+										Confirmar
+									</Button>
 									<Button
 										type='button'
 										className='registerButton'
