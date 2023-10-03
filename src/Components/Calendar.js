@@ -26,7 +26,7 @@ function Calendar({ serviceData }) {
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [email, setEmail] = useState('');
 	const [status, setStatus] = useState('new');
-
+	const [idAppointment, setIdAppointment] = useState('');
 	const defaultValues = event => {
 		setDueDate(null);
 		setSelectedPatient('');
@@ -92,7 +92,34 @@ function Calendar({ serviceData }) {
 			setDueDate(fechaFormateada);
 		}
 	};
+	const handleEventClick = eventClickInfo => {
+		const isAppointment =
+			eventClickInfo.event.extendedProps.array !== undefined;
 
+		if (isAppointment) {
+			const eventDate = eventClickInfo.event.start;
+			const formattedDate = format(eventDate, 'yyyy-MM-dd');
+			const formattedTime = format(eventDate, 'HH:mm:ss');
+			const paciente = eventClickInfo.event.extendedProps.array.patient;
+			const motivoConsulta = eventClickInfo.event.extendedProps.array.id;
+			const idAppointment = eventClickInfo.event.extendedProps.array.id;
+			const fechaActual = format(new Date(), 'yyyy-MM-dd');
+			console.log(fechaActual);
+			if (formattedDate < fechaActual) {
+				alert('La cita seleccionada ya ha pasado.');
+			} else {
+				setDueDate(formattedDate);
+				setSelectedTime(formattedTime);
+				setSelectedPatient('paciente');
+				setReason(motivoConsulta);
+				setStatus('exist');
+				setModalShow(true);
+				setIdAppointment(idAppointment);
+			}
+		} else {
+			console.log('Este evento no es una cita');
+		}
+	};
 	useEffect(() => {
 		console.log(serviceData);
 		fetchData();
@@ -168,6 +195,31 @@ function Calendar({ serviceData }) {
 				console.error(error);
 			});
 	}
+
+	const handleEditAppointment = () => {
+		const dataToUpdate = {
+			institution: 1,
+			service: 1,
+			id: { idAppointment },
+			date: '2023-01-01',
+			hour: '14:00:00',
+		};
+		axios
+			.put(
+				'https://test.habidd.com/api/scheduling/appointments/edit.php',
+				dataToUpdate,
+			)
+			.then(response => {
+				console.log('Respuesta exitosa:', response.data);
+				setModalShow(false);
+				console.log('CITA RE AGENDADA');
+			})
+			.catch(error => {
+				console.error('Error en la solicitud:', error);
+				setModalShow(false);
+				console.log('CITA RE AGENDADA');
+			});
+	};
 
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -303,6 +355,7 @@ function Calendar({ serviceData }) {
 										</div>
 									);
 								}}
+								eventClick={handleEventClick}
 							/>
 						</Col>
 					</Col>
@@ -499,9 +552,23 @@ function Calendar({ serviceData }) {
 							>
 								Cerrar
 							</Button>
-							<Button type='submit' className='registerButton'>
-								Registrar
-							</Button>
+							{status === 'new' ? (
+								<Button type='submit' className='registerButton'>
+									Registrar
+								</Button>
+							) : (
+								<>
+									<Button
+										type='button'
+										className='registerButton'
+										onClick={() => {
+											handleEditAppointment();
+										}}
+									>
+										Actualizar
+									</Button>
+								</>
+							)}
 						</Row>
 					</Form>
 				</Modal.Body>
