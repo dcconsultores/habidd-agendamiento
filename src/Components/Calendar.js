@@ -196,6 +196,31 @@ function Calendar({ serviceData }) {
 			});
 	}
 
+	const handleCancelAppointment = () => {
+		const params = {
+			institution: 1,
+			service: 1,
+			id: { idAppointment },
+			status: 'canceled',
+		};
+
+		axios
+			.put(
+				'https://test.habidd.com/api/scheduling/appointments/edit.php',
+				params,
+			)
+			.then(response => {
+				console.log('Solicitud PUT exitosa:', response.data);
+				setModalShow(false);
+				console.log('CITA CANCELADA');
+			})
+			.catch(error => {
+				console.error('Error en la solicitud PUT:', error);
+				setModalShow(false);
+				console.log('CITA CANCELADA');
+			});
+	};
+
 	const handleConfirmAppointment = () => {
 		const params = {
 			institution: 1,
@@ -581,6 +606,15 @@ function Calendar({ serviceData }) {
 								</Button>
 							) : (
 								<>
+									<Button
+										type='button'
+										className='registerButton'
+										onClick={() => {
+											handleCancelAppointment();
+										}}
+									>
+										Cancelar
+									</Button>
 									<Button
 										type='button'
 										className='closeButton'
