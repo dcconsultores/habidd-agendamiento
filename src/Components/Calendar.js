@@ -84,6 +84,7 @@ function Calendar({ serviceData }) {
 		console.log(fechaFormateada);
 		const fechaActual = format(new Date(), 'yyyy-MM-dd'); // Obtener la fecha actual
 		console.log(fechaActual);
+		// VERIFICAR QUE LA FECHA NO HAYA PASADO
 		if (fechaFormateada < fechaActual) {
 			alert('La fecha seleccionada ya ha pasado.');
 		} else {
@@ -105,6 +106,7 @@ function Calendar({ serviceData }) {
 			const idAppointment = eventClickInfo.event.extendedProps.array.id;
 			const fechaActual = format(new Date(), 'yyyy-MM-dd');
 			console.log(fechaActual);
+			// VERIFICAR QUE LA FECHA NO HAYA PASADO
 			if (formattedDate < fechaActual) {
 				alert('La cita seleccionada ya ha pasado.');
 			} else {
