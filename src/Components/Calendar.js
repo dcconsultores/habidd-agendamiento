@@ -296,6 +296,7 @@ function Calendar({ serviceData }) {
 			duration: 30,
 			notes: 'Nota opcional de la cita',
 		};
+		// SI SE SELECCIONA UN NUEVO PACIENTE PRIMERO SE HACE LA PETICION DE CREAR PACIENTE Y LUEGO LA PETICION DE CREAR CITA
 		if (selectedPatient === 'nuevoPaciente') {
 			axios
 				.post(
