@@ -7,66 +7,12 @@ import axios from 'axios';
 import esLocale from '@fullcalendar/core/locales/es';
 import PropTypes from 'prop-types';
 import '../Stylesheets/CalendarAllServices.css';
+import { UseHollidays } from '../Hooks/UseHollidays';
+import { useAllAppointments } from '../Hooks/useAllAppointments';
 
 function CalendarAllServices({ service }) {
-	const [hollidays, setHolidays] = useState([]);
-	const [allAppointments, setAllAppointments] = useState([]); // Almacenar todos los appointments aquí
-
-	useEffect(() => {
-		fetchData();
-		console.log(service);
-		// Llamar a fetchData2 para cada servicio
-		service.map(item => fetchData2(item.id, item.name));
-		console.log(allAppointments);
-	}, [service]);
-
-	function fetchData() {
-		const options = {
-			method: 'GET',
-			url: `https://test.habidd.com/api/scheduling/institutions/holidays.php?institution=1`,
-		};
-		axios
-			.request(options)
-			.then(response => {
-				if (response.data && response.data.data) {
-					setHolidays(response.data.data);
-				} else {
-					setHolidays([]);
-				}
-			})
-			.catch(error => {
-				console.error(error);
-			});
-	}
-
-	function fetchData2(serviceId, serviceName) {
-		const options = {
-			method: 'GET',
-			url: `https://test.habidd.com/api/scheduling/appointments/list.php?institution=1&service=${serviceId}`,
-		};
-		axios
-			.request(options)
-			.then(response => {
-				if (response.data && response.data.data) {
-					// Agregar el nombre del servicio a cada appointment y luego agregarlos al estado
-					const appointmentsWithServiceName = response.data.data.map(
-						appointment => ({
-							...appointment,
-							serviceName,
-						}),
-					);
-					setAllAppointments(prevAppointments => [
-						...prevAppointments,
-						...appointmentsWithServiceName,
-					]);
-				}
-				console.log(serviceId);
-				console.log(response.data.results);
-			})
-			.catch(error => {
-				console.error(error);
-			});
-	}
+	const { hollidays } = UseHollidays(service);
+	const { allAppointments } = useAllAppointments(service);
 	return (
 		<div>
 			<Container fluid>
