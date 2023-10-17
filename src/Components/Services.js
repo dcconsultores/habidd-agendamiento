@@ -4,17 +4,18 @@ import { Container, Row, Col, Table, Button, Form } from 'react-bootstrap';
 import '../Stylesheets/Services.css';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useProfessionals } from '../Hooks/useProfessionals';
 
 function Services({ setServiceData, service, setService }) {
+	const { professionals } = useProfessionals();
 	const [selectedProfessional, setSelectedProfessional] = useState(
 		'Cualquier profesional',
 	);
-	const [profesionals, setProfessionals] = useState([]);
+
 	useEffect(() => {
 		fetchData();
-		fetchData2();
 	}, []);
-	const saveServiceData = (service, professional) => {
+	const saveServiceData = service => {
 		// Crear un objeto que contenga tanto el servicio como el profesional
 		const serviceData = {
 			service,
@@ -44,28 +45,6 @@ function Services({ setServiceData, service, setService }) {
 				console.error(error);
 			});
 	}
-	function fetchData2() {
-		const options = {
-			method: 'GET',
-			url: `https://test.habidd.com/api/scheduling/professionals/list.php?institution=${1}`,
-		};
-		axios
-			.request(options)
-			.then(response => {
-				console.log(response.data);
-				return response;
-			})
-			.then(responseData => {
-				if (responseData && responseData.data.data) {
-					setProfessionals(responseData.data.data);
-				} else {
-					setProfessionals([]);
-				}
-			})
-			.catch(error => {
-				console.error(error);
-			});
-	}
 
 	return (
 		<div>
@@ -83,7 +62,7 @@ function Services({ setServiceData, service, setService }) {
 										<option value='Cualquier profesional'>
 											Cualquier profesional
 										</option>
-										{profesionals.map((opcion, index) => (
+										{professionals.map((opcion, index) => (
 											<option
 												key={opcion.id}
 												value={`${opcion.nameFirst} ${opcion.surnameFirst}`}
