@@ -7,7 +7,7 @@ import esLocale from '@fullcalendar/core/locales/es';
 import PropTypes from 'prop-types';
 import '../Stylesheets/CalendarAllServices.css';
 import { UseHollidays } from '../Hooks/UseHollidays';
-import { useAllAppointments } from '../Hooks/useAllAppointments';
+import { useAllAppointments } from '../Hooks/UseAllAppointments';
 
 function CalendarAllServices({ service }) {
 	const { hollidays } = UseHollidays(service);

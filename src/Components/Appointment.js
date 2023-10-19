@@ -1,19 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import '../Stylesheets/Calendar.css';
 import axios from 'axios';
-import esLocale from '@fullcalendar/core/locales/es';
-import Modal from 'react-bootstrap/Modal';
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
-import { calculateAge } from '../Helpers/DateHelper.js';
-import { UseHollidays } from '../Hooks/UseHollidays';
-import { UseAppointments } from '../Hooks/UseAppointments';
-import { UsePatients } from '../Hooks/UsePatients';
-import ModalForm from './ModalForm';
 
 export const handleCancelAppointment = (idAppointment, setModalShow) => {
 	const params = {

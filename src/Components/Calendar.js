@@ -34,7 +34,6 @@ function Calendar({ serviceData }) {
 	const [email, setEmail] = useState('');
 	const [status, setStatus] = useState('new');
 	const [idAppointment, setIdAppointment] = useState('');
-
 	const age = calculateAge(dateOfBirth);
 
 	const handleDateClick = arg => {

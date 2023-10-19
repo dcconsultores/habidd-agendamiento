@@ -4,10 +4,10 @@ import { Container, Row, Col, Table, Button, Form } from 'react-bootstrap';
 import '../Stylesheets/Services.css';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useProfessionals } from '../Hooks/useProfessionals';
+import { UseProfessionals } from '../Hooks/UseProfessionals';
 
 function Services({ setServiceData, service, setService }) {
-	const { professionals } = useProfessionals();
+	const { professionals } = UseProfessionals();
 	const [selectedProfessional, setSelectedProfessional] = useState(
 		'Cualquier profesional',
 	);

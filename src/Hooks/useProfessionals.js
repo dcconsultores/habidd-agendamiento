@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import '../Stylesheets/Services.css';
 
-export const useProfessionals = () => {
+export const UseProfessionals = () => {
 	const [professionals, setProfessionals] = useState([]);
 	function getAllProfessionals() {
 		const options = {
