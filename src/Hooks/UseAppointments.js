@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const UseAppointments = () => {
 	const [appointments, setAppointments] = useState([]);
-	function fetchData2() {
+	function getAppointments() {
 		const options = {
 			method: 'GET',
 			url: `https://test.habidd.com/api/scheduling/appointments/list.php?institution=1&service=${1}`,
@@ -27,7 +27,7 @@ export const UseAppointments = () => {
 	}
 
 	useEffect(() => {
-		fetchData2();
+		getAppointments();
 	}, []);
 	return {
 		appointments,

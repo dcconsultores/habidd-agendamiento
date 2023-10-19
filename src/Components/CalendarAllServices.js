@@ -3,7 +3,6 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { Container, Row, Col } from 'react-bootstrap';
-import axios from 'axios';
 import esLocale from '@fullcalendar/core/locales/es';
 import PropTypes from 'prop-types';
 import '../Stylesheets/CalendarAllServices.css';
@@ -16,16 +15,16 @@ function CalendarAllServices({ service }) {
 	return (
 		<div>
 			<Container fluid>
-				<Row className='container1'>
-					<Col className='container2'>
-						<Col className='container3'>
-							<Row className='custom-tittle'>
+				<Row className='calendar-container'>
+					<Col className='calendar-container__box'>
+						<Col className='calendar-container__calendar'>
+							<Row className='calendar-container__custom-tittle'>
 								<h4>Servicio solicitado</h4>
 								<p>Todos los servicios</p>
 							</Row>
 							<FullCalendar
 								locale={esLocale}
-								className='calendar'
+								className='calendar-container__fullcalendar'
 								plugins={[dayGridPlugin, interactionPlugin]}
 								initialView='dayGridWeek'
 								headerToolbar={{
@@ -39,14 +38,14 @@ function CalendarAllServices({ service }) {
 										title: 'CERRADO',
 										date: item.date,
 										color: '#F2A654',
-										className: 'custom-event1',
+										className: 'calendar-container__hollidays',
 									})),
 									...allAppointments.map((item, index) => ({
 										title: item.serviceName,
 										date: `${item.date}T${item.timeStart}`,
 										display: 'block',
 										color: '#54728c',
-										className: 'custom-event2',
+										className: 'calendar-container__appointments',
 									})),
 								]}
 								eventTimeFormat={{
@@ -56,11 +55,11 @@ function CalendarAllServices({ service }) {
 								}}
 								eventContent={arg => {
 									return arg.event.title === 'CERRADO' ? (
-										<div className='custom-event'>
+										<div className='calendar-container__custom-event'>
 											<p>{arg.event.title}</p>
 										</div>
 									) : (
-										<div className='custom-event'>
+										<div className='calendar-container__custom-event'>
 											<p>
 												<strong>{arg.timeText}</strong>
 											</p>

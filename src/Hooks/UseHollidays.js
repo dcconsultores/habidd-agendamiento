@@ -5,10 +5,10 @@ export const UseHollidays = serviceData => {
 	const [hollidays, setHollidays] = useState([]);
 	useEffect(() => {
 		console.log(serviceData);
-		fetchData();
+		getHollidays();
 	}, []);
 
-	function fetchData() {
+	function getHollidays() {
 		const options = {
 			method: 'GET',
 			url: `https://test.habidd.com/api/scheduling/institutions/holidays.php?institution=${serviceData.id}`,

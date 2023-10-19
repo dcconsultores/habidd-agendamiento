@@ -4,9 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import '../Stylesheets/Calendar.css';
-import axios from 'axios';
 import esLocale from '@fullcalendar/core/locales/es';
-import Modal from 'react-bootstrap/Modal';
 import PropTypes from 'prop-types';
 import { UseHollidays } from '../Hooks/UseHollidays';
 import { UseAppointments } from '../Hooks/UseAppointments';
@@ -96,10 +94,10 @@ function Calendar({ serviceData }) {
 	return (
 		<div>
 			<Container fluid>
-				<Row className='container1'>
-					<Col className='container2'>
-						<Col className='container3'>
-							<Row className='custom-tittle'>
+				<Row className='calendar-container'>
+					<Col className='calendar-container__box'>
+						<Col className='calendar-container__calendar'>
+							<Row className='calendar-container__custom-tittle'>
 								<h4>Servicio solicitado</h4>
 								<p>
 									{serviceData.service.code} - {serviceData.service.name} -{' '}
@@ -108,21 +106,21 @@ function Calendar({ serviceData }) {
 							</Row>
 							<FullCalendar
 								locale={esLocale}
-								className='calendar'
+								className='calendar-container__fullcalendar'
 								plugins={[dayGridPlugin, interactionPlugin]}
 								dateClick={handleDateClick}
 								headerToolbar={{
 									left: 'prev',
 									center: 'title',
 									right: 'next',
-								}} /* HELPER */
+								}}
 								aspectRatio={2}
 								events={[
 									...hollidays.map((item, index) => ({
 										title: 'CERRADO',
 										date: item.date,
 										color: '#F2A654',
-										className: 'custom-event1',
+										className: 'calendar-container__hollidays',
 									})),
 									...appointments.map((item, index) => ({
 										title: 'Ocupada',
@@ -130,7 +128,7 @@ function Calendar({ serviceData }) {
 										display: 'block',
 										color: '#54728c',
 										array: item,
-										className: 'custom-event2',
+										className: 'calendar-container__appointments',
 									})),
 								]}
 								eventTimeFormat={{
@@ -140,11 +138,11 @@ function Calendar({ serviceData }) {
 								}}
 								eventContent={arg => {
 									return arg.event.title === 'CERRADO' ? (
-										<div className='custom-event'>
+										<div className='calendar-container__custom-event'>
 											<p>{arg.event.title}</p>
 										</div>
 									) : (
-										<div className='custom-event'>
+										<div className='calendar-container__custom-event'>
 											<p>
 												<strong>{arg.timeText}</strong>
 											</p>

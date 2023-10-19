@@ -13,7 +13,7 @@ function Services({ setServiceData, service, setService }) {
 	);
 
 	useEffect(() => {
-		fetchData();
+		getAllServices();
 	}, []);
 	const saveServiceData = service => {
 		// Crear un objeto que contenga tanto el servicio como el profesional
@@ -23,7 +23,7 @@ function Services({ setServiceData, service, setService }) {
 		};
 		setServiceData(serviceData);
 	};
-	function fetchData() {
+	function getAllServices() {
 		const options = {
 			method: 'GET',
 			url: `https://test.habidd.com/api/scheduling/services/list.php?institution=${1}`,
@@ -49,15 +49,15 @@ function Services({ setServiceData, service, setService }) {
 	return (
 		<div>
 			<Container fluid>
-				<Row className='container1'>
-					<Col className='container'>
+				<Row className='services-container'>
+					<Col className='services-container__box'>
 						<Col>
 							<Form>
 								<Form.Group>
 									<Form.Select
 										value={selectedProfessional}
 										onChange={e => setSelectedProfessional(e.target.value)}
-										className='container-select'
+										className='services-container__select-professional'
 									>
 										<option value='Cualquier profesional'>
 											Cualquier profesional
@@ -76,7 +76,12 @@ function Services({ setServiceData, service, setService }) {
 							</Form>
 						</Col>
 
-						<Table className='table-container' responsive bordered striped>
+						<Table
+							className='services-container__table'
+							responsive
+							bordered
+							striped
+						>
 							<thead>
 								<tr>
 									<th>Servicio</th>

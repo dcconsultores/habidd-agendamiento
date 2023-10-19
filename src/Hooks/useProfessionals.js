@@ -1,13 +1,10 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Container, Row, Col, Table, Button, Form } from 'react-bootstrap';
 import '../Stylesheets/Services.css';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 export const useProfessionals = () => {
 	const [professionals, setProfessionals] = useState([]);
-	function fetchData2() {
+	function getAllProfessionals() {
 		const options = {
 			method: 'GET',
 			url: `https://test.habidd.com/api/scheduling/professionals/list.php?institution=${1}`,
@@ -30,7 +27,7 @@ export const useProfessionals = () => {
 			});
 	}
 	useEffect(() => {
-		fetchData2();
+		getAllProfessionals();
 	}, []);
 	return {
 		professionals,

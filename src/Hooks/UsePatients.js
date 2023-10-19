@@ -4,10 +4,10 @@ import axios from 'axios';
 export const UsePatients = () => {
 	const [patients, setPatients] = useState([]);
 	useEffect(() => {
-		fetchData3();
+		getPatients();
 	}, []);
 
-	function fetchData3() {
+	function getPatients() {
 		const options = {
 			method: 'GET',
 			url: `https://test.habidd.com/api/scheduling/patients/list.php?institution=${1}`,

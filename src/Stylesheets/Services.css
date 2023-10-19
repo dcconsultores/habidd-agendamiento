@@ -1,19 +1,7 @@
-.container1 {
+.services-container {
 	padding: 30px;
 }
-.custom-nav {
-	background-color: #ff0000;
-}
-.custom-nav2 {
-	background-color: aqua;
-	height: 10%;
-}
-
-.custom-nav3 {
-	background-color: #fff;
-	height: 90%;
-}
-.container {
+.services-container__box {
 	background-color: #eaeaef;
 	margin-left: auto;
 	margin-right: auto;
@@ -24,7 +12,7 @@
 	padding: 30px 30px 20px 30px;
 	height: fit-content;
 }
-.table-container {
+.services-container__table {
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -32,22 +20,22 @@
 	border-radius: 15px;
 	overflow: hidden;
 }
-.table-container th {
+.services-container__table th {
 	font-size: 16px;
 	font-family: Montesrrat, sans-serif;
 }
-.table-container tr {
+.services-container__table tr {
 	font-size: 14px;
 	font-family: Montesrrat, sans-serif;
 	justify-content: center;
 }
-.table-container button {
+.services-container__table button {
 	background-color: #62a8ea;
 	border-color: #62a8ea;
 	font-size: 12px;
 	font-family: Montesrrat, sans-serif;
 }
-.container-select {
+.services-container__select-professional {
 	margin-bottom: 10px;
 	text-align: center;
 }

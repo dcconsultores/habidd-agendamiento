@@ -7,11 +7,11 @@ export const useAllAppointments = service => {
 	useEffect(() => {
 		console.log(service);
 		// Llamar a fetchData2 para cada servicio
-		service.map(item => fetchData2(item.id, item.name));
+		service.map(item => getAllAppointments(item.id, item.name));
 		console.log(allAppointments);
 	}, [service]);
 
-	function fetchData2(serviceId, serviceName) {
+	function getAllAppointments(serviceId, serviceName) {
 		const options = {
 			method: 'GET',
 			url: `https://test.habidd.com/api/scheduling/appointments/list.php?institution=1&service=${serviceId}`,
