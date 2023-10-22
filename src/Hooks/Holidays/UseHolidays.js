@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export const UseHollidays = serviceData => {
-	const [hollidays, setHollidays] = useState([]);
+export const UseHolidays = serviceData => {
+	const [Holidays, setHolidays] = useState([]);
 	useEffect(() => {
 		console.log(serviceData);
-		getHollidays();
+		getHolidays();
 	}, []);
 
-	function getHollidays() {
+	function getHolidays() {
 		const options = {
 			method: 'GET',
 			url: `https://test.habidd.com/api/scheduling/institutions/holidays.php?institution=${serviceData.id}`,
@@ -21,9 +21,9 @@ export const UseHollidays = serviceData => {
 			})
 			.then(responseData => {
 				if (responseData && responseData.data.data) {
-					setHollidays(responseData.data.data);
+					setHolidays(responseData.data.data);
 				} else {
-					setHollidays([]);
+					setHolidays([]);
 				}
 			})
 			.catch(error => {
@@ -31,6 +31,6 @@ export const UseHollidays = serviceData => {
 			});
 	}
 	return {
-		hollidays,
+		Holidays,
 	};
 };

@@ -3,21 +3,22 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { Container, Row, Col } from 'react-bootstrap';
-import '../Stylesheets/Calendar.css';
+import '../../Stylesheets/Calendar/Calendar.css';
 import esLocale from '@fullcalendar/core/locales/es';
 import PropTypes from 'prop-types';
-import { UseHollidays } from '../Hooks/UseHollidays';
-import { UseAppointments } from '../Hooks/UseAppointments';
-import { UsePatients } from '../Hooks/UsePatients';
-import ModalForm from './ModalForm';
+import { UseHolidays } from '../../Hooks/Holidays/UseHolidays';
+import { UseAppointments } from '../../Hooks/Appointments/UseAppointments';
+import { UsePatients } from '../../Hooks/Patients/UsePatients';
+import ModalForm from '../Form/ModalForm';
+
 import {
 	getHourMinuteSecond,
 	getYearMonthDay,
 	calculateAge,
-} from '../Helpers/DateHelper.js';
+} from '../../Helpers/DateHelper.js';
 
 function Calendar({ serviceData }) {
-	const { hollidays } = UseHollidays(serviceData);
+	const { Holidays } = UseHolidays(serviceData);
 	const { appointments } = UseAppointments();
 	const [modalShow, setModalShow] = useState(false);
 	const [dueDate, setDueDate] = useState(null);
@@ -115,11 +116,11 @@ function Calendar({ serviceData }) {
 								}}
 								aspectRatio={2}
 								events={[
-									...hollidays.map((item, index) => ({
+									...Holidays.map((item, index) => ({
 										title: 'CERRADO',
 										date: item.date,
 										color: '#F2A654',
-										className: 'calendar-container__hollidays',
+										className: 'calendar-container__Holidays',
 									})),
 									...appointments.map((item, index) => ({
 										title: 'Ocupada',

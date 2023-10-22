@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import '../Stylesheets/Services.css';
 
 export const UseProfessionals = () => {
 	const [professionals, setProfessionals] = useState([]);

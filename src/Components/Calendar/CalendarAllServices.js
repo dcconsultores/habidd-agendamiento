@@ -5,12 +5,12 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { Container, Row, Col } from 'react-bootstrap';
 import esLocale from '@fullcalendar/core/locales/es';
 import PropTypes from 'prop-types';
-import '../Stylesheets/CalendarAllServices.css';
-import { UseHollidays } from '../Hooks/UseHollidays';
-import { useAllAppointments } from '../Hooks/UseAllAppointments';
+import '../../Stylesheets/Calendar/CalendarAllServices.css';
+import { UseHolidays } from '../../Hooks/Holidays/UseHolidays';
+import { useAllAppointments } from '../../Hooks/Appointments/UseAllAppointments';
 
 function CalendarAllServices({ service }) {
-	const { hollidays } = UseHollidays(service);
+	const { Holidays } = UseHolidays(service);
 	const { allAppointments } = useAllAppointments(service);
 	return (
 		<div>
@@ -34,11 +34,11 @@ function CalendarAllServices({ service }) {
 								}}
 								aspectRatio={2}
 								events={[
-									...hollidays.map((item, index) => ({
+									...Holidays.map((item, index) => ({
 										title: 'CERRADO',
 										date: item.date,
 										color: '#F2A654',
-										className: 'calendar-container__hollidays',
+										className: 'calendar-container__Holidays',
 									})),
 									...allAppointments.map((item, index) => ({
 										title: item.serviceName,

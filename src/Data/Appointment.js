@@ -1,4 +1,3 @@
-import '../Stylesheets/Calendar.css';
 import axios from 'axios';
 
 export const handleCancelAppointment = (idAppointment, setModalShow) => {

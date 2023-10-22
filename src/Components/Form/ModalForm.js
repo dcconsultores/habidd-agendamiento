@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Button, Form } from 'react-bootstrap';
-import '../Stylesheets/Calendar.css';
+import '../../Stylesheets/Calendar/Calendar.css';
 import Modal from 'react-bootstrap/Modal';
 import PropTypes from 'prop-types';
 
@@ -9,7 +9,7 @@ import {
 	handleConfirmAppointment,
 	handleEditAppointment,
 	handleCreateAppointment,
-} from '../Data/Appointment';
+} from '../../Data/Appointment';
 
 function ModalForm({
 	serviceData,
