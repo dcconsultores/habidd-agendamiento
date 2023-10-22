@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import React from 'react';
+import { Row, Col, Button, Form } from 'react-bootstrap';
 import '../Stylesheets/Calendar.css';
 import Modal from 'react-bootstrap/Modal';
 import PropTypes from 'prop-types';
@@ -12,7 +9,8 @@ import {
 	handleConfirmAppointment,
 	handleEditAppointment,
 	handleCreateAppointment,
-} from './Appointment';
+} from '../Data/Appointment';
+
 function ModalForm({
 	serviceData,
 	modalShow,
