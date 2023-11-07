@@ -1,10 +1,10 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Services from './Components/Services/Services';
+import Services from './Components/Services/Services.js';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
-import Calendar from './Components/Calendar/Calendar';
-import CalendarAllServices from './Components/Calendar/CalendarAllServices';
+import Calendar from './Components/Calendar/Calendar.js';
+import CalendarAllServices from './Components/Calendar/CalendarAllServices.js';
 
 function App() {
 	const [service, setService] = useState([]);

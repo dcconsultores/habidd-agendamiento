@@ -9,7 +9,7 @@ import {
 	handleConfirmAppointment,
 	handleEditAppointment,
 	handleCreateAppointment,
-} from '../../Data/Appointment';
+} from '../../Data/Appointment.js';
 
 function ModalForm({
 	serviceData,
@@ -130,7 +130,7 @@ function ModalForm({
 									>
 										<option value='blanco'> </option>
 										{patients.map((opcion, index) => (
-											<option key={opcion.id} value={opcion}>
+											<option key={opcion.id} value={opcion.id}>
 												{opcion.nameFirst} {opcion.nameSecond}{' '}
 												{opcion.surnameFirst} {opcion.surnameSecond}
 											</option>

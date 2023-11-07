@@ -6,10 +6,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 import '../../Stylesheets/Calendar/Calendar.css';
 import esLocale from '@fullcalendar/core/locales/es';
 import PropTypes from 'prop-types';
-import { UseHolidays } from '../../Hooks/Holidays/UseHolidays';
-import { UseAppointments } from '../../Hooks/Appointments/UseAppointments';
-import { UsePatients } from '../../Hooks/Patients/UsePatients';
-import ModalForm from '../Form/ModalForm';
+import { UseHolidays } from '../../Hooks/Holidays/UseHolidays.js';
+import { UseAppointments } from '../../Hooks/Appointments/UseAppointments.js';
+import { UsePatients } from '../../Hooks/Patients/UsePatients.js';
+import ModalForm from '../Form/ModalForm.js';
 
 import {
 	getHourMinuteSecond,

@@ -4,7 +4,7 @@ import { Container, Row, Col, Table, Button, Form } from 'react-bootstrap';
 import '../../Stylesheets/Services/Services.css';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { UseProfessionals } from '../../Hooks/Proffesionals/UseProfessionals';
+import { UseProfessionals } from '../../Hooks/Proffesionals/UseProfessionals.js';
 
 function Services({ setServiceData, service, setService }) {
 	const { professionals } = UseProfessionals();

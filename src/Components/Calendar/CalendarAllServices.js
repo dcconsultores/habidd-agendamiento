@@ -6,8 +6,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import esLocale from '@fullcalendar/core/locales/es';
 import PropTypes from 'prop-types';
 import '../../Stylesheets/Calendar/CalendarAllServices.css';
-import { UseHolidays } from '../../Hooks/Holidays/UseHolidays';
-import { useAllAppointments } from '../../Hooks/Appointments/UseAllAppointments';
+import { UseHolidays } from '../../Hooks/Holidays/UseHolidays.js';
+import { useAllAppointments } from '../../Hooks/Appointments/UseAllAppointments.js';
 
 function CalendarAllServices({ service }) {
 	const { Holidays } = UseHolidays(service);
