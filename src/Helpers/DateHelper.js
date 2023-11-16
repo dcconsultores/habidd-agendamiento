@@ -25,3 +25,10 @@ export function getHourMinuteSecond(date) {
 	const formattedDate = format(date, 'HH:mm:ss');
 	return formattedDate;
 }
+
+export function isDatePast(dateString) {
+	const currentDate = new Date();
+	const appointmentDate = new Date(dateString);
+
+	return appointmentDate < currentDate;
+}

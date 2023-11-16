@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import Calendar from './Components/Calendar/Calendar.js';
 import CalendarAllServices from './Components/Calendar/CalendarAllServices.js';
+import PatientAppointment from './Components/Patient/PatientAppointments';
 
 function App() {
 	const [service, setService] = useState([]);
@@ -29,6 +30,16 @@ function App() {
 				<Route
 					path='/calendarAllServices'
 					element={<CalendarAllServices service={service} />}
+				/>
+				<Route
+					path='/ClientAppointment'
+					element={
+						<PatientAppointment
+							setServiceData={setServiceData}
+							service={service}
+							setService={setService}
+						/>
+					}
 				/>
 			</Routes>
 		</div>
