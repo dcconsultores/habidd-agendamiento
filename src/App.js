@@ -32,7 +32,7 @@ function App() {
 					element={<CalendarAllServices service={service} />}
 				/>
 				<Route
-					path='/ClientAppointment'
+					path='/PatientAppointment'
 					element={
 						<PatientAppointment
 							setServiceData={setServiceData}

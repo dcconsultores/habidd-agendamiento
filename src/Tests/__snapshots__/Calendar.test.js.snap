@@ -531,7 +531,7 @@ exports[`renders content 1`] = `
                                           </td>
                                           <td
                                             aria-labelledby="fc-dom-18"
-                                            class="fc-day fc-day-tue fc-day-today fc-daygrid-day"
+                                            class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                             data-date="2023-11-07"
                                             role="gridcell"
                                           >
@@ -564,7 +564,7 @@ exports[`renders content 1`] = `
                                           </td>
                                           <td
                                             aria-labelledby="fc-dom-20"
-                                            class="fc-day fc-day-wed fc-day-future fc-daygrid-day"
+                                            class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                             data-date="2023-11-08"
                                             role="gridcell"
                                           >
@@ -597,7 +597,7 @@ exports[`renders content 1`] = `
                                           </td>
                                           <td
                                             aria-labelledby="fc-dom-22"
-                                            class="fc-day fc-day-thu fc-day-future fc-daygrid-day"
+                                            class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                             data-date="2023-11-09"
                                             role="gridcell"
                                           >
@@ -630,7 +630,7 @@ exports[`renders content 1`] = `
                                           </td>
                                           <td
                                             aria-labelledby="fc-dom-24"
-                                            class="fc-day fc-day-fri fc-day-future fc-daygrid-day"
+                                            class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                             data-date="2023-11-10"
                                             role="gridcell"
                                           >
@@ -663,7 +663,7 @@ exports[`renders content 1`] = `
                                           </td>
                                           <td
                                             aria-labelledby="fc-dom-26"
-                                            class="fc-day fc-day-sat fc-day-future fc-daygrid-day"
+                                            class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                             data-date="2023-11-11"
                                             role="gridcell"
                                           >
@@ -696,7 +696,7 @@ exports[`renders content 1`] = `
                                           </td>
                                           <td
                                             aria-labelledby="fc-dom-28"
-                                            class="fc-day fc-day-sun fc-day-future fc-daygrid-day"
+                                            class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                             data-date="2023-11-12"
                                             role="gridcell"
                                           >
@@ -733,7 +733,7 @@ exports[`renders content 1`] = `
                                         >
                                           <td
                                             aria-labelledby="fc-dom-30"
-                                            class="fc-day fc-day-mon fc-day-future fc-daygrid-day"
+                                            class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                             data-date="2023-11-13"
                                             role="gridcell"
                                           >
@@ -766,7 +766,7 @@ exports[`renders content 1`] = `
                                           </td>
                                           <td
                                             aria-labelledby="fc-dom-32"
-                                            class="fc-day fc-day-tue fc-day-future fc-daygrid-day"
+                                            class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                             data-date="2023-11-14"
                                             role="gridcell"
                                           >
@@ -799,7 +799,7 @@ exports[`renders content 1`] = `
                                           </td>
                                           <td
                                             aria-labelledby="fc-dom-34"
-                                            class="fc-day fc-day-wed fc-day-future fc-daygrid-day"
+                                            class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                             data-date="2023-11-15"
                                             role="gridcell"
                                           >
@@ -832,7 +832,7 @@ exports[`renders content 1`] = `
                                           </td>
                                           <td
                                             aria-labelledby="fc-dom-36"
-                                            class="fc-day fc-day-thu fc-day-future fc-daygrid-day"
+                                            class="fc-day fc-day-thu fc-day-today fc-daygrid-day"
                                             data-date="2023-11-16"
                                             role="gridcell"
                                           >
@@ -2215,7 +2215,7 @@ exports[`renders content 1`] = `
                                         </td>
                                         <td
                                           aria-labelledby="fc-dom-18"
-                                          class="fc-day fc-day-tue fc-day-today fc-daygrid-day"
+                                          class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                           data-date="2023-11-07"
                                           role="gridcell"
                                         >
@@ -2248,7 +2248,7 @@ exports[`renders content 1`] = `
                                         </td>
                                         <td
                                           aria-labelledby="fc-dom-20"
-                                          class="fc-day fc-day-wed fc-day-future fc-daygrid-day"
+                                          class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                           data-date="2023-11-08"
                                           role="gridcell"
                                         >
@@ -2281,7 +2281,7 @@ exports[`renders content 1`] = `
                                         </td>
                                         <td
                                           aria-labelledby="fc-dom-22"
-                                          class="fc-day fc-day-thu fc-day-future fc-daygrid-day"
+                                          class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                           data-date="2023-11-09"
                                           role="gridcell"
                                         >
@@ -2314,7 +2314,7 @@ exports[`renders content 1`] = `
                                         </td>
                                         <td
                                           aria-labelledby="fc-dom-24"
-                                          class="fc-day fc-day-fri fc-day-future fc-daygrid-day"
+                                          class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                           data-date="2023-11-10"
                                           role="gridcell"
                                         >
@@ -2347,7 +2347,7 @@ exports[`renders content 1`] = `
                                         </td>
                                         <td
                                           aria-labelledby="fc-dom-26"
-                                          class="fc-day fc-day-sat fc-day-future fc-daygrid-day"
+                                          class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                           data-date="2023-11-11"
                                           role="gridcell"
                                         >
@@ -2380,7 +2380,7 @@ exports[`renders content 1`] = `
                                         </td>
                                         <td
                                           aria-labelledby="fc-dom-28"
-                                          class="fc-day fc-day-sun fc-day-future fc-daygrid-day"
+                                          class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                           data-date="2023-11-12"
                                           role="gridcell"
                                         >
@@ -2417,7 +2417,7 @@ exports[`renders content 1`] = `
                                       >
                                         <td
                                           aria-labelledby="fc-dom-30"
-                                          class="fc-day fc-day-mon fc-day-future fc-daygrid-day"
+                                          class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                           data-date="2023-11-13"
                                           role="gridcell"
                                         >
@@ -2450,7 +2450,7 @@ exports[`renders content 1`] = `
                                         </td>
                                         <td
                                           aria-labelledby="fc-dom-32"
-                                          class="fc-day fc-day-tue fc-day-future fc-daygrid-day"
+                                          class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                           data-date="2023-11-14"
                                           role="gridcell"
                                         >
@@ -2483,7 +2483,7 @@ exports[`renders content 1`] = `
                                         </td>
                                         <td
                                           aria-labelledby="fc-dom-34"
-                                          class="fc-day fc-day-wed fc-day-future fc-daygrid-day"
+                                          class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                           data-date="2023-11-15"
                                           role="gridcell"
                                         >
@@ -2516,7 +2516,7 @@ exports[`renders content 1`] = `
                                         </td>
                                         <td
                                           aria-labelledby="fc-dom-36"
-                                          class="fc-day fc-day-thu fc-day-future fc-daygrid-day"
+                                          class="fc-day fc-day-thu fc-day-today fc-daygrid-day"
                                           data-date="2023-11-16"
                                           role="gridcell"
                                         >

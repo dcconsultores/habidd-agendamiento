@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 
-export function calculateAge(dateOfBirth) {
-	const today = new Date();
+export function calculateAge(dateOfBirth, todayDate) {
+	const today = new Date(todayDate);
 	const birthDate = new Date(dateOfBirth);
 	let age = today.getFullYear() - birthDate.getFullYear();
 
