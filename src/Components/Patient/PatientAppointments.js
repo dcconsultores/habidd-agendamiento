@@ -66,8 +66,8 @@ function PatientAppointment({ setServiceData, service, setService }) {
 										<td>{item.status}</td>
 										<td>
 											<Button
-												onClick={() =>
-													handleCancelAppointment(item.id, setModalShow)
+												onClick={
+													() => handleCancelAppointment(item.id, setModalShow) // Cancel Appointment
 												}
 												disabled={isDatePast(item.date)}
 												className={isDatePast(item.date) ? 'grayButton' : ''}
