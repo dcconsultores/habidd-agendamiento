@@ -1,0 +1,103 @@
+.daily-calendar-container {
+	padding: 30px;
+}
+.daily-calendar-container__box {
+	background-color: #eaeaef;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+	padding: 15px;
+	display: flex;
+}
+.daily-calendar-container__today {
+	padding: 10px;
+	font-family: Montserrat, sans-serif;
+	font-size: 70px;
+	font-weight: 200;
+	text-transform: uppercase;
+	flex: 1 45%;
+}
+.daily-calendar-container__filter {
+	display: flex;
+	gap: 5px;
+}
+.daily-calendar-container__calendar {
+	background-color: #fff;
+	padding: 10px;
+	margin: 5px;
+	font-family: Montserrat, sans-serif;
+	font-size: 20px;
+	font-weight: 200;
+	flex: 1 55%;
+}
+.daily-calendar-container__custom-tittle {
+	text-align: left;
+	margin-bottom: 25px;
+	font-family: Montserrat, sans-serif;
+}
+
+.daily-calendar-container__custom-tittle h4 {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.daily-calendar-container__custom-tittle p {
+	font-size: 14px;
+}
+
+.daily-calendar-container__custom-event {
+	padding: 0px 1px;
+	border-radius: 10px;
+	font-size: 11.9px;
+	font-family: 'Montserrat', sans-serif;
+}
+.daily-calendar-container__custom-event p {
+	margin: 0px;
+}
+.daily-calendar-container__Holidays {
+	padding: 5px;
+	height: 90px;
+	border-radius: 10px;
+	font-size: 11.9px;
+	font-family: 'Montserrat', sans-serif;
+}
+.daily-calendar-container__appointments {
+	padding: 5px;
+	margin: 5px;
+	height: 50px;
+	border-radius: 10px;
+	font-size: 11.9px;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.fc-col-header-cell-cushion,
+.fc-daygrid-day-number {
+	color: #37474f;
+	text-decoration: none;
+	font-family: Montserrat, sans-serif;
+	font-size: 14px;
+	font-weight: 200;
+	text-transform: uppercase;
+}
+.fc .fc-toolbar {
+	margin-bottom: 150px;
+	justify-content: space-between !important;
+}
+.fc .fc-button {
+	background-color: #fff;
+	color: #000;
+	border: none;
+}
+#fc-dom-1388 {
+	font-size: 20px;
+	font-family: Roboto, sans-serif;
+	font-weight: 300;
+	color: #37474f;
+	text-transform: capitalize;
+}
+.fc-day-today {
+	background: #eaeaef !important;
+}

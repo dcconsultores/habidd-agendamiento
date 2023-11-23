@@ -39,3 +39,12 @@
 	margin-bottom: 10px;
 	text-align: center;
 }
+.services-container__buttons {
+	display: flex;
+	gap: 30px;
+	justify-content: center;
+}
+.services-container__buttons Button {
+	background-color: #62a8ea;
+	border-color: #62a8ea;
+}

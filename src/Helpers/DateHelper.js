@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import esLocalee from 'date-fns/locale/es';
 
 export function calculateAge(dateOfBirth, todayDate) {
 	const today = new Date(todayDate);
@@ -31,4 +32,12 @@ export function isDatePast(dateString) {
 	const appointmentDate = new Date(dateString);
 
 	return appointmentDate < currentDate;
+}
+
+export function getCurrentDateFormatted() {
+	const currentDate = new Date();
+	const formattedDate = format(currentDate, "EEEE dd 'de' MMMM 'de' yyyy", {
+		locale: esLocalee,
+	});
+	return formattedDate;
 }

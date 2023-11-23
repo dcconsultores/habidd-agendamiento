@@ -107,11 +107,14 @@ function Services({ setServiceData, service, setService }) {
 								))}
 							</tbody>
 						</Table>
-						<Col>
+						<Col className='services-container__buttons'>
 							<Link to={`/calendarAllServices`}>
 								<Button onClick={() => console.log(service)}>
 									Todos los servicios
 								</Button>
+							</Link>
+							<Link to={`/dailyAppointments`}>
+								<Button>Citas del dia</Button>
 							</Link>
 						</Col>
 					</Col>

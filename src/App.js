@@ -6,7 +6,7 @@ import { useState } from 'react';
 import Calendar from './Components/Calendar/Calendar.js';
 import CalendarAllServices from './Components/Calendar/CalendarAllServices.js';
 import PatientAppointment from './Components/Patient/PatientAppointments';
-
+import DailyAppointments from './Components/Calendar/DailyAppointments';
 function App() {
 	const [service, setService] = useState([]);
 	const [serviceData, setServiceData] = useState([]);
@@ -40,6 +40,10 @@ function App() {
 							setService={setService}
 						/>
 					}
+				/>
+				<Route
+					path='/dailyAppointments'
+					element={<DailyAppointments service={service} />}
 				/>
 			</Routes>
 		</div>
