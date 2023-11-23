@@ -14,7 +14,51 @@ import { getCurrentDateFormatted } from '../../Helpers/DateHelper';
 function DailyAppointments({ service }) {
 	const { Holidays } = UseHolidays(service);
 	const { allAppointments } = useAllAppointments(service);
+	const { professionals } = UseProfessionals();
+	const [selectedProfessional, setSelectedProfessional] = useState(
+		'Todos los profesionales',
+	);
+	const appointmentData = [
+		{
+			id: '1',
+			institution: '1',
+			service: '1',
+			patientId: '1',
+			date: '2024-01-01',
+			hourFrom: '09:00:00',
+			hourTo: '14:30:00',
+			reference: '1234567890',
+			professional: 'Jhon Doe',
+			status: 'Pendiente',
+		},
+		{
+			id: '1',
+			institution: '1',
+			service: '1',
+			patientId: '1',
+			date: '2023-01-01',
+			hourFrom: '10:00:00',
+			hourTo: '14:30:00',
+			reference: '1234567890',
+			professional: 'Jhon Doee',
+			status: 'Realizada',
+		},
+	];
+	const [selectedService, setSelectedService] = useState('Todos los servicios');
 
+	const filteredAppointments = allAppointments.filter(item => {
+		const professionalFilter =
+			!selectedProfessional ||
+			selectedProfessional === 'Todos los profesionales' ||
+			item.timeStart === selectedProfessional;
+
+		const serviceFilter =
+			!selectedService ||
+			selectedService === 'Todos los servicios' ||
+			item.serviceName === selectedService;
+
+		return professionalFilter && serviceFilter;
+	});
 	return (
 		<div>
 			<Container fluid>
@@ -24,6 +68,48 @@ function DailyAppointments({ service }) {
 							{getCurrentDateFormatted()}
 						</Col>
 						<Col className='daily-calendar-container__calendar'>
+							<Col className='daily-calendar-container__filter'>
+								<Col className='daily-calendar-container__professional'>
+									<Form>
+										<Form.Group>
+											<Form.Select
+												value={selectedProfessional}
+												onChange={e => setSelectedProfessional(e.target.value)}
+												className='services-container__select-professional'
+											>
+												<option value='Todos los profesionales'>
+													Todos los profesionales
+												</option>
+												{appointmentData.map((opcion, index) => (
+													<option key={opcion.id} value={`${opcion.hourFrom}`}>
+														{opcion.hourFrom}
+													</option>
+												))}
+											</Form.Select>
+										</Form.Group>
+									</Form>
+								</Col>
+								<Col className='daily-calendar-container__service'>
+									<Form>
+										<Form.Group>
+											<Form.Select
+												value={selectedService}
+												onChange={e => setSelectedService(e.target.value)}
+												className='services-container__select-service'
+											>
+												<option value='Todos los servicios'>
+													Todos los servicios
+												</option>
+												{service.map((opcion, index) => (
+													<option key={opcion.id} value={`${opcion.name}`}>
+														{opcion.code} - {opcion.name}
+													</option>
+												))}
+											</Form.Select>
+										</Form.Group>
+									</Form>
+								</Col>
+							</Col>
 							<FullCalendar
 								locale={esLocale}
 								className='daily-calendar-container__fullcalendar'
@@ -38,7 +124,7 @@ function DailyAppointments({ service }) {
 										color: '#F2A654',
 										className: 'daily-calendar-container__Holidays',
 									})),
-									...allAppointments.map((item, index) => ({
+									...filteredAppointments.map((item, index) => ({
 										title: item.serviceName,
 										date: `${item.date}T${item.timeStart}`,
 										display: 'block',
