@@ -123,7 +123,7 @@ function DailyAppointments({ service }) {
 								aspectRatio={2}
 								events={[
 									...Holidays.map((item, index) => ({
-										title: t('Codes.Close'),
+										title: t('Codes.Closed'),
 										date: item.date,
 										color: '#F2A654',
 										className: 'daily-calendar-container__Holidays',
@@ -142,7 +142,7 @@ function DailyAppointments({ service }) {
 									meridiem: false,
 								}}
 								eventContent={arg => {
-									return arg.event.title === t('Codes.Close') ? (
+									return arg.event.title === t('Codes.Closed') ? (
 										<div className='daily-calendar-container__custom-event'>
 											<p>{arg.event.title}</p>
 										</div>
