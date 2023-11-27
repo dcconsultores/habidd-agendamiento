@@ -5,11 +5,40 @@ import '../../Stylesheets/Services/Services.css';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { UseProfessionals } from '../../Hooks/Proffesionals/UseProfessionals.js';
+import { useTranslation } from 'react-i18next';
 
 function Services({ setServiceData, service, setService }) {
+	const [t, i18n] = useTranslation('global');
+	const servicee = [
+		{
+			id: '1',
+			institution: '1',
+			service: '1',
+			date: '2023-01-01',
+			timeStart: '09:00:00',
+			timeEnd: '09:30:00',
+			Professional: {
+				id: '1',
+				professional_id: '1',
+				institution_id: '1',
+				idType: 'CC',
+				idNumber: '52588956',
+				nameFirst: 'Sandra',
+				nameSecond: 'Lucia',
+				surnameFirst: 'Moreno',
+				surnameSecond: 'Gaitan',
+				phoneNumberMobile: '3114743775',
+				email: 'sandralucg@hotmail.com',
+				occupation: 'Odontologo',
+			},
+			PatientId: '1',
+			status: 'Pendiente',
+			Notes: 'N/A',
+		},
+	];
 	const { professionals } = UseProfessionals();
 	const [selectedProfessional, setSelectedProfessional] = useState(
-		'Cualquier profesional',
+		t('Codes.SelectProfessional'),
 	);
 
 	useEffect(() => {
@@ -60,7 +89,7 @@ function Services({ setServiceData, service, setService }) {
 										className='services-container__select-professional'
 									>
 										<option value='Cualquier profesional'>
-											Cualquier profesional
+											{t('Codes.SelectProfessional')}
 										</option>
 										{professionals.map((opcion, index) => (
 											<option
@@ -84,13 +113,13 @@ function Services({ setServiceData, service, setService }) {
 						>
 							<thead>
 								<tr>
-									<th>Servicio</th>
-									<th>Duracion min</th>
-									<th>Acciones</th>
+									<th>{t('Codes.Service')}</th>
+									<th>{t('Codes.Duration')}</th>
+									<th>{t('Codes.Action')}</th>
 								</tr>
 							</thead>
 							<tbody>
-								{service.map((item, index) => (
+								{servicee.map((item, index) => (
 									<tr key={index}>
 										<td>
 											{item.code} - {item.name}
@@ -99,7 +128,7 @@ function Services({ setServiceData, service, setService }) {
 										<td>
 											<Link to={`/calendar/${item.id}`}>
 												<Button onClick={() => saveServiceData(item)}>
-													Solicitar
+													{t('Codes.GoTo')}
 												</Button>
 											</Link>
 										</td>
@@ -110,11 +139,11 @@ function Services({ setServiceData, service, setService }) {
 						<Col className='services-container__buttons'>
 							<Link to={`/calendarAllServices`}>
 								<Button onClick={() => console.log(service)}>
-									Todos los servicios
+									{t('Codes.AllServices')}
 								</Button>
 							</Link>
 							<Link to={`/dailyAppointments`}>
-								<Button>Citas del dia</Button>
+								<Button>{t('Codes.DailyAppointments')}</Button>
 							</Link>
 						</Col>
 					</Col>

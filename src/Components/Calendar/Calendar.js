@@ -10,7 +10,7 @@ import { UseHolidays } from '../../Hooks/Holidays/UseHolidays.js';
 import { UseAppointments } from '../../Hooks/Appointments/UseAppointments.js';
 import { UsePatients } from '../../Hooks/Patients/UsePatients.js';
 import ModalForm from '../Form/ModalForm.js';
-
+import { useTranslation } from 'react-i18next';
 import {
 	getHourMinuteSecond,
 	getYearMonthDay,
@@ -18,6 +18,7 @@ import {
 } from '../../Helpers/DateHelper.js';
 
 function Calendar({ serviceData }) {
+	const [t, i18n] = useTranslation('global');
 	const { Holidays } = UseHolidays(serviceData);
 	const { appointments } = UseAppointments();
 	const [modalShow, setModalShow] = useState(false);
@@ -35,7 +36,10 @@ function Calendar({ serviceData }) {
 	const [email, setEmail] = useState('');
 	const [status, setStatus] = useState('new');
 	const [idAppointment, setIdAppointment] = useState('');
-	const age = calculateAge(dateOfBirth);
+	const age = calculateAge(dateOfBirth, Date.now());
+	const [isWhatsappChecked, setIsWhatsappChecked] = useState(true);
+	const [isEmailChecked, setIsEmailChecked] = useState(true);
+	const [isSmsChecked, setIsSmsChecked] = useState(true);
 
 	const handleDateClick = arg => {
 		const fechaFormateada = getYearMonthDay(arg.date);
@@ -44,7 +48,7 @@ function Calendar({ serviceData }) {
 		console.log(fechaActual);
 		// VERIFICAR QUE LA FECHA NO HAYA PASADO
 		if (fechaFormateada < fechaActual) {
-			alert('La fecha seleccionada ya ha pasado.');
+			alert(t('Codes.LastDate'));
 		} else {
 			setSelectedPatient('');
 			setDateOfBirth('');
@@ -76,7 +80,7 @@ function Calendar({ serviceData }) {
 			console.log(fechaActual);
 			// VERIFICAR QUE LA FECHA NO HAYA PASADO
 			if (formattedDate < fechaActual) {
-				alert('La cita seleccionada ya ha pasado.');
+				alert(t('Codes.LastAppointment'));
 			} else {
 				setDueDate(formattedDate);
 				setSelectedTime(formattedTime);
@@ -98,7 +102,7 @@ function Calendar({ serviceData }) {
 					<Col className='calendar-container__box'>
 						<Col className='calendar-container__calendar'>
 							<Row className='calendar-container__custom-tittle'>
-								<h4>Servicio solicitado</h4>
+								<h4>{t('Codes.SelectedService')}</h4>
 								<p>
 									{serviceData.service.code} - {serviceData.service.name} -{' '}
 									{serviceData.selectedProfessional}
@@ -117,13 +121,13 @@ function Calendar({ serviceData }) {
 								aspectRatio={2}
 								events={[
 									...Holidays.map((item, index) => ({
-										title: 'CERRADO',
+										title: t('Codes.Close'),
 										date: item.date,
 										color: '#F2A654',
 										className: 'calendar-container__Holidays',
 									})),
 									...appointments.map((item, index) => ({
-										title: 'Ocupada',
+										title: t('Codes.Busy'),
 										date: `${item.date}T${item.timeStart}`,
 										display: 'block',
 										color: '#54728c',
@@ -137,7 +141,7 @@ function Calendar({ serviceData }) {
 									meridiem: false,
 								}}
 								eventContent={arg => {
-									return arg.event.title === 'CERRADO' ? (
+									return arg.event.title === t('Codes.Close') ? (
 										<div className='calendar-container__custom-event'>
 											<p>{arg.event.title}</p>
 										</div>
@@ -187,6 +191,12 @@ function Calendar({ serviceData }) {
 				setReason={setReason}
 				setStatus={setStatus}
 				idAppointment={idAppointment}
+				isWhatsappChecked={isWhatsappChecked}
+				setIsWhatsappChecked={setIsWhatsappChecked}
+				isEmailChecked={isEmailChecked}
+				setIsEmailChecked={setIsEmailChecked}
+				isSmsChecked={isSmsChecked}
+				setIsSmsChecked={setIsSmsChecked}
 			/>
 		</div>
 	);

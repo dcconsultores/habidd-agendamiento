@@ -79,6 +79,9 @@ export const handleCreateAppointment = (setModalShow, selectedPatient) => {
 		birthday: '1990-01-15', // Fecha de nacimiento en formato YYYY-MM-DD
 		phoneNumberMobile: '1234567890', // Número de teléfono móvil (opcional)
 		email: 'juan@example.com', // Correo electrónico del paciente (opcional)
+		ContactedWhatsapp: true,
+		contactedEmail: false,
+		contactedSms: false,
 	};
 	const appointmentData = {
 		institution: 1,

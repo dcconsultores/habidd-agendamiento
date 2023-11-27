@@ -136,3 +136,11 @@
 .form-modal__input--read-only:hover {
 	cursor: not-allowed;
 }
+.custom-checkbox .form-check-label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.custom-checkbox .form-check-input {
+	margin-top: -2px;
+}

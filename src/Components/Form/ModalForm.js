@@ -3,7 +3,8 @@ import { Row, Col, Button, Form } from 'react-bootstrap';
 import '../../Stylesheets/Calendar/Calendar.css';
 import Modal from 'react-bootstrap/Modal';
 import PropTypes from 'prop-types';
-
+import InputGroup from 'react-bootstrap/InputGroup';
+import { useTranslation } from 'react-i18next';
 import {
 	handleCancelAppointment,
 	handleConfirmAppointment,
@@ -42,7 +43,14 @@ function ModalForm({
 	setReason,
 	setStatus,
 	idAppointment,
+	isWhatsappChecked,
+	setIsWhatsappChecked,
+	isEmailChecked,
+	setIsEmailChecked,
+	isSmsChecked,
+	setIsSmsChecked,
 }) {
+	const [t, i18n] = useTranslation('global');
 	const handleSubmit = e => {
 		e.preventDefault();
 		handleCreateAppointment(setModalShow, selectedPatient);
@@ -59,7 +67,7 @@ function ModalForm({
 			>
 				<Modal.Header closeButton>
 					<Modal.Title id='contained-modal-title-vcenter'>
-						Solicitud de cita
+						{t('Codes.Request')}
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
@@ -70,7 +78,9 @@ function ModalForm({
 								controlId='formGrouService'
 								change
 							>
-								<Form.Label className='form-modal__label'>Servicio</Form.Label>
+								<Form.Label className='form-modal__label'>
+									{t('Codes.Service')}
+								</Form.Label>
 								<p className='form-modal__text'>
 									{serviceData.service.code} - {serviceData.service.name} -{' '}
 									{serviceData.selectedProfessional}
@@ -80,7 +90,9 @@ function ModalForm({
 								className='form-modal__group'
 								controlId='formGroupDate'
 							>
-								<Form.Label className='form-modal__label'>Fecha</Form.Label>
+								<Form.Label className='form-modal__label'>
+									{t('Codes.Date')}
+								</Form.Label>
 								<Form.Control
 									type='date'
 									className='form-modal__input'
@@ -96,11 +108,13 @@ function ModalForm({
 								className='form-modal__group'
 								controlId='formGroupTime'
 							>
-								<Form.Label className='form-modal__label'>Hora</Form.Label>
+								<Form.Label className='form-modal__label'>
+									{t('Codes.Hour')}
+								</Form.Label>
 								<Form.Control
 									type='time'
 									className='form-modal__input'
-									placeholder='Hora'
+									placeholder={t('Codes.Hour')}
 									value={selectedTime}
 									onChange={e => {
 										setSelectedTime(e.target.value);
@@ -111,7 +125,9 @@ function ModalForm({
 								className='form-modal__group'
 								controlId='formGroupPatient'
 							>
-								<Form.Label className='form-modal__label'>Paciente</Form.Label>
+								<Form.Label className='form-modal__label'>
+									{t('Codes.Patient')}
+								</Form.Label>
 								{status === 'exist' ? (
 									<Form.Control
 										type='text'
@@ -135,7 +151,9 @@ function ModalForm({
 												{opcion.surnameFirst} {opcion.surnameSecond}
 											</option>
 										))}
-										<option value='nuevoPaciente'>Nuevo paciente</option>
+										<option value='nuevoPaciente'>
+											{t('Codes.NewPatient')}
+										</option>
 									</Form.Select>
 								)}
 							</Form.Group>
@@ -147,11 +165,11 @@ function ModalForm({
 										controlId='formGroupPatientName'
 									>
 										<Form.Label className='form-modal__label'>
-											Nombre del paciente
+											{t('Codes.PatientName')}
 										</Form.Label>
 										<Form.Control
 											className='form-modal__input'
-											placeholder='Nombre(s)'
+											placeholder={t('Codes.Name')}
 											value={name}
 											onChange={e => setName(e.target.value)}
 										/>
@@ -161,11 +179,11 @@ function ModalForm({
 										controlId='formGroupPatientLastName'
 									>
 										<Form.Label className='form-modal__label'>
-											Apellido del paciente
+											{t('Codes.PatientLastName')}
 										</Form.Label>
 										<Form.Control
 											className='form-modal__input'
-											placeholder='Apellido(s)'
+											placeholder={t('Codes.LastName')}
 											value={lastName}
 											onChange={e => setLastName(e.target.value)}
 										/>
@@ -173,7 +191,7 @@ function ModalForm({
 									<Row className='form-modal__row'>
 										<Form.Group as={Col} controlId='formGroupTypeDocument'>
 											<Form.Label className='form-modal__label'>
-												Tipo de Documento
+												{t('Codes.DocumentType')}
 											</Form.Label>
 											<Form.Select
 												value={documentType}
@@ -182,29 +200,27 @@ function ModalForm({
 											>
 												<option value='blanco'> </option>
 												<option value='blanco'> </option>
-												<option value='cc'>Cédula de ciudadanía</option>
-												<option value='ce'>Cédula de extranjería</option>
-												<option value='cd'>Carnet diplomático</option>
-												<option value='p'>Pasaporte</option>
-												<option value='s'>Salvoconucto</option>
-												<option value='pep'>
-													Permiso Especial de Permanencia
-												</option>
-												<option value='rc'>Registro civil</option>
-												<option value='ti'>Tarjeta de identidad</option>
-												<option value='cnv'>Certificiado de nacido vivo</option>
-												<option value='ai'>Adulto sin identificar</option>
-												<option value='mi'>Menor sin identificar</option>
+												<option value='cc'>{t('Codes.cc')}</option>
+												<option value='ce'>{t('Codes.ce')}</option>
+												<option value='cd'>{t('Codes.cd')}</option>
+												<option value='p'>{t('Codes.p')}</option>
+												<option value='sc'>{t('Codes.sc')}</option>
+												<option value='pep'>{t('Codes.pep')}</option>
+												<option value='rc'>{t('Codes.rc')}</option>
+												<option value='ti'>{t('Codes.ti')}</option>
+												<option value='cnv'>{t('Codes.cnv')}</option>
+												<option value='asi'>{t('Codes.asi')}</option>
+												<option value='msi'>{t('Codes.msi')}</option>
 											</Form.Select>
 										</Form.Group>
 
 										<Form.Group as={Col} controlId='formGroupDocument'>
 											<Form.Label className='form-modal__label'>
-												Documento de Identificación
+												{t('Codes.ID')}
 											</Form.Label>
 											<Form.Control
 												className='form-modal__input'
-												placeholder='Documento'
+												placeholder={t('Codes.Number')}
 												value={document}
 												onChange={e => setDocument(e.target.value)}
 											/>
@@ -213,7 +229,7 @@ function ModalForm({
 									<Row className='form-modal__row'>
 										<Form.Group as={Col} controlId='formGroupDateOfBirth'>
 											<Form.Label className='form-modal__label'>
-												Fecha de nacimiento
+												{t('Codes.BirthDate')}
 											</Form.Label>
 											<Form.Control
 												type='date'
@@ -227,11 +243,11 @@ function ModalForm({
 
 										<Form.Group as={Col} controlId='formGroupAge'>
 											<Form.Label className='form-modal__label'>
-												Edad
+												{t('Codes.Age')}
 											</Form.Label>
 											<Form.Control
 												type='text'
-												value={age + ' años'}
+												value={age + t('Codes.Year')}
 												readOnly
 												className='form-modal__input form-modal__input--read-only'
 											/>
@@ -240,25 +256,62 @@ function ModalForm({
 									<Row className='form-modal__row'>
 										<Form.Group as={Col} controlId='formGroupPhoneNumber'>
 											<Form.Label className='form-modal__label'>
-												Teléfono Celular
+												{t('Codes.PhoneNumber')}
 											</Form.Label>
 											<Form.Control
 												className='form-modal__input'
-												placeholder='Teléfono celular'
+												placeholder={t('Codes.Number')}
 												value={phoneNumber}
 												onChange={e => setPhoneNumber(e.target.value)}
 											/>
 										</Form.Group>
 										<Form.Group as={Col} controlId='formGroupEmail'>
 											<Form.Label className='form-modal__label'>
-												Email
+												{t('Codes.Email')}
 											</Form.Label>
 											<Form.Control
 												type='email'
 												className='form-modal__input'
-												placeholder='Email'
+												placeholder={t('Codes.ExampleEmail')}
 												value={email}
 												onChange={e => setEmail(e.target.value)}
+											/>
+										</Form.Group>
+									</Row>
+
+									<Row className='form-modal__row'>
+										<p>{t('Codes.SelectContactMethod')}</p>
+										<Form.Group as={Col} controlId='formGroupContactedWhatsapp'>
+											<Form.Check
+												type='checkbox'
+												label={t('Codes.Wpp')}
+												checked={!isWhatsappChecked}
+												onChange={e => {
+													setIsWhatsappChecked(!isWhatsappChecked);
+													console.log(isWhatsappChecked);
+												}}
+											/>
+										</Form.Group>
+										<Form.Group as={Col} controlId='formGroupEmail'>
+											<Form.Check
+												type='checkbox'
+												label={t('Codes.Email')}
+												checked={!isEmailChecked}
+												onChange={e => {
+													setIsEmailChecked(!isEmailChecked);
+													console.log(isEmailChecked);
+												}}
+											/>
+										</Form.Group>
+										<Form.Group as={Col} controlId='formGroupEmail'>
+											<Form.Check
+												type='checkbox'
+												label={t('Codes.sms')}
+												checked={!isSmsChecked}
+												onChange={e => {
+													setIsSmsChecked(!isSmsChecked);
+													console.log(isSmsChecked);
+												}}
 											/>
 										</Form.Group>
 									</Row>
@@ -269,7 +322,7 @@ function ModalForm({
 								controlId='formGroupReason'
 							>
 								<Form.Label className='form-modal__label'>
-									Motivo de consulta
+									{t('Codes.Reason')}
 								</Form.Label>
 								{status === 'exist' ? (
 									<Form.Control
@@ -282,7 +335,7 @@ function ModalForm({
 									<Form.Control
 										as='textarea'
 										className='form-modal__textarea'
-										placeholder='Motivo'
+										placeholder={t('Codes.Reason')}
 										value={reason}
 										onChange={e => setReason(e.target.value)}
 									/>
@@ -297,14 +350,14 @@ function ModalForm({
 									setStatus('new');
 								}}
 							>
-								Cerrar
+								{t('Codes.Close')}
 							</Button>
 							{status === 'new' ? (
 								<Button
 									type='submit'
 									className='modal-footer__button modal-footer__button--register'
 								>
-									Registrar
+									{t('Codes.Register')}
 								</Button>
 							) : (
 								<>
@@ -315,7 +368,7 @@ function ModalForm({
 											handleCancelAppointment(idAppointment, setModalShow);
 										}}
 									>
-										Cancelar
+										{t('Codes.Cancel')}
 									</Button>
 									<Button
 										type='button'
@@ -324,7 +377,7 @@ function ModalForm({
 											handleConfirmAppointment(idAppointment, setModalShow);
 										}}
 									>
-										Confirmar
+										{t('Codes.Confirm')}
 									</Button>
 									<Button
 										type='button'
@@ -333,7 +386,7 @@ function ModalForm({
 											handleEditAppointment(idAppointment, setModalShow);
 										}}
 									>
-										Actualizar
+										{t('Codes.Update')}
 									</Button>
 								</>
 							)}
@@ -383,6 +436,12 @@ ModalForm.propTypes = {
 	setDateOfBirth: PropTypes.any,
 	setDueDate: PropTypes.any,
 	idAppointment: PropTypes.any,
+	isWhatsappChecked: PropTypes.any,
+	setIsWhatsappChecked: PropTypes.any,
+	isEmailChecked: PropTypes.any,
+	setIsEmailChecked: PropTypes.any,
+	isSmsChecked: PropTypes.any,
+	setIsSmsChecked: PropTypes.any,
 };
 
 export default ModalForm;

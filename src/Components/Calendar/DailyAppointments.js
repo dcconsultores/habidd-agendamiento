@@ -10,13 +10,15 @@ import { UseHolidays } from '../../Hooks/Holidays/UseHolidays.js';
 import { useAllAppointments } from '../../Hooks/Appointments/UseAllAppointments.js';
 import { UseProfessionals } from '../../Hooks/Proffesionals/UseProfessionals';
 import { getCurrentDateFormatted } from '../../Helpers/DateHelper';
+import { useTranslation } from 'react-i18next';
 
 function DailyAppointments({ service }) {
+	const [t, i18n] = useTranslation('global');
 	const { Holidays } = UseHolidays(service);
 	const { allAppointments } = useAllAppointments(service);
 	const { professionals } = UseProfessionals();
 	const [selectedProfessional, setSelectedProfessional] = useState(
-		'Todos los profesionales',
+		t('Codes.AllProfessionals'),
 	);
 	const appointmentData = [
 		{
@@ -44,7 +46,9 @@ function DailyAppointments({ service }) {
 			status: 'Realizada',
 		},
 	];
-	const [selectedService, setSelectedService] = useState('Todos los servicios');
+	const [selectedService, setSelectedService] = useState(
+		t('Codes.AllServices'),
+	);
 
 	const filteredAppointments = allAppointments.filter(item => {
 		const professionalFilter =
@@ -78,7 +82,7 @@ function DailyAppointments({ service }) {
 												className='services-container__select-professional'
 											>
 												<option value='Todos los profesionales'>
-													Todos los profesionales
+													{t('Codes.AllProfessionals')}
 												</option>
 												{appointmentData.map((opcion, index) => (
 													<option key={opcion.id} value={`${opcion.hourFrom}`}>
@@ -98,7 +102,7 @@ function DailyAppointments({ service }) {
 												className='services-container__select-service'
 											>
 												<option value='Todos los servicios'>
-													Todos los servicios
+													{t('Codes.AllServices')}
 												</option>
 												{service.map((opcion, index) => (
 													<option key={opcion.id} value={`${opcion.name}`}>
@@ -119,7 +123,7 @@ function DailyAppointments({ service }) {
 								aspectRatio={2}
 								events={[
 									...Holidays.map((item, index) => ({
-										title: 'CERRADO',
+										title: t('Codes.Close'),
 										date: item.date,
 										color: '#F2A654',
 										className: 'daily-calendar-container__Holidays',
@@ -138,7 +142,7 @@ function DailyAppointments({ service }) {
 									meridiem: false,
 								}}
 								eventContent={arg => {
-									return arg.event.title === 'CERRADO' ? (
+									return arg.event.title === t('Codes.Close') ? (
 										<div className='daily-calendar-container__custom-event'>
 											<p>{arg.event.title}</p>
 										</div>

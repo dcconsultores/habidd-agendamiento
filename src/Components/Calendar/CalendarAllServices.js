@@ -8,8 +8,10 @@ import PropTypes from 'prop-types';
 import '../../Stylesheets/Calendar/CalendarAllServices.css';
 import { UseHolidays } from '../../Hooks/Holidays/UseHolidays.js';
 import { useAllAppointments } from '../../Hooks/Appointments/UseAllAppointments.js';
+import { useTranslation } from 'react-i18next';
 
 function CalendarAllServices({ service }) {
+	const [t, i18n] = useTranslation('global');
 	const { Holidays } = UseHolidays(service);
 	const { allAppointments } = useAllAppointments(service);
 	return (
@@ -19,8 +21,8 @@ function CalendarAllServices({ service }) {
 					<Col className='calendar-container__box'>
 						<Col className='calendar-container__calendar'>
 							<Row className='calendar-container__custom-tittle'>
-								<h4>Servicio solicitado</h4>
-								<p>Todos los servicios</p>
+								<h4>{t('Codes.SelectedService')}</h4>
+								<p>{t('Codes.AllServices')}</p>
 							</Row>
 							<FullCalendar
 								locale={esLocale}
@@ -35,7 +37,7 @@ function CalendarAllServices({ service }) {
 								aspectRatio={2}
 								events={[
 									...Holidays.map((item, index) => ({
-										title: 'CERRADO',
+										title: t('Codes.Close'),
 										date: item.date,
 										color: '#F2A654',
 										className: 'calendar-container__Holidays',
@@ -54,7 +56,7 @@ function CalendarAllServices({ service }) {
 									meridiem: false,
 								}}
 								eventContent={arg => {
-									return arg.event.title === 'CERRADO' ? (
+									return arg.event.title === t('Codes.Close') ? (
 										<div className='calendar-container__custom-event'>
 											<p>{arg.event.title}</p>
 										</div>
