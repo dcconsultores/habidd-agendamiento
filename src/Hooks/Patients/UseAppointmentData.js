@@ -10,7 +10,7 @@ export const UseAppointmentData = id => {
 	function getAppointments() {
 		const options = {
 			method: 'GET',
-			url: `https://test.habidd.com/api/scheduling/appointments/search.php?institution=1&service=1&PatientId=${1}`,
+			url: `https://demo.habidd.com/api/scheduling/appointments/search.php?institution=1&service=1&PatientId=${1}`,
 		};
 		axios
 			.request(options)

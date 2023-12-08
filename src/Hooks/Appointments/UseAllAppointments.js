@@ -14,7 +14,7 @@ export const useAllAppointments = service => {
 	function getAllAppointments(serviceId, serviceName) {
 		const options = {
 			method: 'GET',
-			url: `https://test.habidd.com/api/scheduling/appointments/list.php?institution=1&service=${serviceId}`,
+			url: `https://demo.habidd.com/api/scheduling/appointments/list.php?institution=1&service=${serviceId}`,
 		};
 		axios
 			.request(options)

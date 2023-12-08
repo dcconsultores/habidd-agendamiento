@@ -55,16 +55,16 @@ function Services({ setServiceData, service, setService }) {
 	function getAllServices() {
 		const options = {
 			method: 'GET',
-			url: `https://test.habidd.com/api/scheduling/services/list.php?institution=${1}`,
+			url: `https://demo.habidd.com/api/scheduling/services/list.php?institution=${1}`,
 		};
 		axios
 			.request(options)
 			.then(response => {
-				console.log(response.data.data);
+				console.log(response);
 				return response;
 			})
 			.then(responseData => {
-				if (responseData && responseData.data.data) {
+				if (responseData && responseData.data) {
 					setService(responseData.data.data);
 				} else {
 					setService([]);
@@ -119,7 +119,7 @@ function Services({ setServiceData, service, setService }) {
 								</tr>
 							</thead>
 							<tbody>
-								{servicee.map((item, index) => (
+								{service.map((item, index) => (
 									<tr key={index}>
 										<td>
 											{item.code} - {item.name}

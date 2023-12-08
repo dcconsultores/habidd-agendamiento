@@ -6,7 +6,7 @@ export const UseProfessionals = () => {
 	function getAllProfessionals() {
 		const options = {
 			method: 'GET',
-			url: `https://test.habidd.com/api/scheduling/professionals/list.php?institution=${1}`,
+			url: `https://demo.habidd.com/api/scheduling/professionals/list.php?institution=${1}`,
 		};
 		axios
 			.request(options)

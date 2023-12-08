@@ -11,7 +11,7 @@ export const UseHolidays = serviceData => {
 	function getHolidays() {
 		const options = {
 			method: 'GET',
-			url: `https://test.habidd.com/api/scheduling/institutions/holidays.php?institution=${serviceData.id}`,
+			url: `https://demo.habidd.com/api/scheduling/institutions/holidays.php?institution=${serviceData.id}`,
 		};
 		axios
 			.request(options)
