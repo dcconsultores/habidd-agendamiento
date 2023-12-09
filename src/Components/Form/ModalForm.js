@@ -51,6 +51,19 @@ function ModalForm({
 	setIsSmsChecked,
 }) {
 	const [t, i18n] = useTranslation('global');
+	const documentTypeOptions = [
+		'cc',
+		'ce',
+		'cd',
+		'p',
+		'sc',
+		'pep',
+		'rc',
+		'ti',
+		'cnv',
+		'asi',
+		'msi',
+	];
 	const handleSubmit = e => {
 		e.preventDefault();
 		handleCreateAppointment(setModalShow, selectedPatient);
@@ -199,18 +212,11 @@ function ModalForm({
 												onChange={e => setDocumentType(e.target.value)}
 											>
 												<option value='blanco'> </option>
-												<option value='blanco'> </option>
-												<option value='cc'>{t('Codes.cc')}</option>
-												<option value='ce'>{t('Codes.ce')}</option>
-												<option value='cd'>{t('Codes.cd')}</option>
-												<option value='p'>{t('Codes.p')}</option>
-												<option value='sc'>{t('Codes.sc')}</option>
-												<option value='pep'>{t('Codes.pep')}</option>
-												<option value='rc'>{t('Codes.rc')}</option>
-												<option value='ti'>{t('Codes.ti')}</option>
-												<option value='cnv'>{t('Codes.cnv')}</option>
-												<option value='asi'>{t('Codes.asi')}</option>
-												<option value='msi'>{t('Codes.msi')}</option>
+												{documentTypeOptions.map((opcion, index) => (
+													<option key={opcion} value={opcion}>
+														{t(`Codes.document.${opcion}`)}
+													</option>
+												))}
 											</Form.Select>
 										</Form.Group>
 
@@ -350,14 +356,14 @@ function ModalForm({
 									setStatus('new');
 								}}
 							>
-								{t('Codes.Close')}
+								{t('Codes.buttons.Close')}
 							</Button>
 							{status === 'new' ? (
 								<Button
 									type='submit'
 									className='modal-footer__button modal-footer__button--register'
 								>
-									{t('Codes.Register')}
+									{t('Codes.buttons.Register')}
 								</Button>
 							) : (
 								<>
@@ -368,7 +374,7 @@ function ModalForm({
 											handleCancelAppointment(idAppointment, setModalShow);
 										}}
 									>
-										{t('Codes.Cancel')}
+										{t('Codes.buttons.Cancel')}
 									</Button>
 									<Button
 										type='button'
@@ -377,7 +383,7 @@ function ModalForm({
 											handleConfirmAppointment(idAppointment, setModalShow);
 										}}
 									>
-										{t('Codes.Confirm')}
+										{t('Codes.buttons.Confirm')}
 									</Button>
 									<Button
 										type='button'
@@ -386,7 +392,7 @@ function ModalForm({
 											handleEditAppointment(idAppointment, setModalShow);
 										}}
 									>
-										{t('Codes.Update')}
+										{t('Codes.buttons.Update')}
 									</Button>
 								</>
 							)}

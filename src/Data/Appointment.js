@@ -86,10 +86,10 @@ export const handleCreateAppointment = (setModalShow, selectedPatient) => {
 	};
 	const appointmentData = {
 		institution: 1,
-		service: 1,
+		service: 25,
 		patient: 123,
 		professional: 456,
-		date: '2023-12-07',
+		date: '2023-12-09',
 		hour: '09:00',
 		duration: 60,
 		notes: 'Consulta regular',
