@@ -11,33 +11,6 @@ import { serviceContext } from '../../App';
 function Services({ setServiceData, setService }) {
 	const service = useContext(serviceContext);
 	const [t, i18n] = useTranslation('global');
-	const servicee = [
-		{
-			id: '1',
-			institution: '1',
-			service: '1',
-			date: '2023-01-01',
-			timeStart: '09:00:00',
-			timeEnd: '09:30:00',
-			Professional: {
-				id: '1',
-				professional_id: '1',
-				institution_id: '1',
-				idType: 'CC',
-				idNumber: '52588956',
-				nameFirst: 'Sandra',
-				nameSecond: 'Lucia',
-				surnameFirst: 'Moreno',
-				surnameSecond: 'Gaitan',
-				phoneNumberMobile: '3114743775',
-				email: 'sandralucg@hotmail.com',
-				occupation: 'Odontologo',
-			},
-			PatientId: '1',
-			status: 'Pendiente',
-			Notes: 'N/A',
-		},
-	];
 	const { professionals } = UseProfessionals();
 	const [selectedProfessional, setSelectedProfessional] = useState(
 		t('Codes.SelectProfessional'),

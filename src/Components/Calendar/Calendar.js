@@ -36,10 +36,6 @@ function Calendar({ serviceData }) {
 	const [email, setEmail] = useState('');
 	const [status, setStatus] = useState('new');
 	const [idAppointment, setIdAppointment] = useState('');
-	const age = calculateAge(dateOfBirth, Date.now());
-	const [isWhatsappChecked, setIsWhatsappChecked] = useState(true);
-	const [isEmailChecked, setIsEmailChecked] = useState(true);
-	const [isSmsChecked, setIsSmsChecked] = useState(true);
 
 	const handleDateClick = arg => {
 		const fechaFormateada = getYearMonthDay(arg.date);
@@ -182,7 +178,6 @@ function Calendar({ serviceData }) {
 				dateOfBirth={dateOfBirth}
 				setDateOfBirth={setDateOfBirth}
 				name={name}
-				age={age}
 				phoneNumber={phoneNumber}
 				setPhoneNumber={setPhoneNumber}
 				email={email}
@@ -191,12 +186,6 @@ function Calendar({ serviceData }) {
 				setReason={setReason}
 				setStatus={setStatus}
 				idAppointment={idAppointment}
-				isWhatsappChecked={isWhatsappChecked}
-				setIsWhatsappChecked={setIsWhatsappChecked}
-				isEmailChecked={isEmailChecked}
-				setIsEmailChecked={setIsEmailChecked}
-				isSmsChecked={isSmsChecked}
-				setIsSmsChecked={setIsSmsChecked}
 			/>
 		</div>
 	);
