@@ -1,13 +1,15 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Container, Row, Col, Table, Button, Form } from 'react-bootstrap';
 import '../../Stylesheets/Services/Services.css';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { UseProfessionals } from '../../Hooks/Proffesionals/UseProfessionals.js';
 import { useTranslation } from 'react-i18next';
+import { serviceContext } from '../../App';
 
-function Services({ setServiceData, service, setService }) {
+function Services({ setServiceData, setService }) {
+	const service = useContext(serviceContext);
 	const [t, i18n] = useTranslation('global');
 	const servicee = [
 		{

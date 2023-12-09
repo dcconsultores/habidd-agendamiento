@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { handleCancelAppointment } from '../../Data/Appointment';
 import { UseAppointmentData } from '../../Hooks/Patients/UseAppointmentData';
 import { isDatePast } from '../../Helpers/DateHelper';
-function PatientAppointment({ setServiceData, service, setService }) {
+function PatientAppointment() {
 	const { appointmentDataa } = UseAppointmentData();
 	const [modalShow, setModalShow] = useState(false);
 

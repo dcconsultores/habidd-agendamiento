@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -9,8 +9,10 @@ import '../../Stylesheets/Calendar/CalendarAllServices.css';
 import { UseHolidays } from '../../Hooks/Holidays/UseHolidays.js';
 import { useAllAppointments } from '../../Hooks/Appointments/UseAllAppointments.js';
 import { useTranslation } from 'react-i18next';
+import { serviceContext } from '../../App';
 
-function CalendarAllServices({ service }) {
+function CalendarAllServices() {
+	const service = useContext(serviceContext);
 	const [t, i18n] = useTranslation('global');
 	const { Holidays } = UseHolidays(service);
 	const { allAppointments } = useAllAppointments(service);

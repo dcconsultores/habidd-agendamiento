@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -11,9 +11,11 @@ import { useAllAppointments } from '../../Hooks/Appointments/UseAllAppointments.
 import { UseProfessionals } from '../../Hooks/Proffesionals/UseProfessionals';
 import { getCurrentDateFormatted } from '../../Helpers/DateHelper';
 import { useTranslation } from 'react-i18next';
+import { serviceContext } from '../../App';
 
-function DailyAppointments({ service }) {
+function DailyAppointments() {
 	const [t, i18n] = useTranslation('global');
+	const service = useContext(serviceContext);
 	const { Holidays } = UseHolidays(service);
 	const { allAppointments } = useAllAppointments(service);
 	const { professionals } = UseProfessionals();
