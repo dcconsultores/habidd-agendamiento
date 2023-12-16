@@ -10,7 +10,7 @@ import { UseHolidays } from '../../Hooks/Holidays/UseHolidays.js';
 import { useAllAppointments } from '../../Hooks/Appointments/UseAllAppointments.js';
 import { useTranslation } from 'react-i18next';
 import { serviceContext } from '../../App';
-
+import { getStatusColor } from '../../Helpers/colorHelper';
 function CalendarAllServices() {
 	const service = useContext(serviceContext);
 	const [t, i18n] = useTranslation('global');
@@ -48,7 +48,7 @@ function CalendarAllServices() {
 										title: item.serviceName,
 										date: `${item.date}T${item.timeStart}`,
 										display: 'block',
-										color: '#54728c',
+										color: getStatusColor(item.status),
 										className: 'calendar-container__appointments',
 									})),
 								]}

@@ -70,7 +70,26 @@ function ModalForm({
 	];
 	const handleSubmit = e => {
 		e.preventDefault();
-		handleCreateAppointment(setModalShow, selectedPatient);
+		handleCreateAppointment(
+			setModalShow,
+			selectedPatient,
+			email,
+			phoneNumber,
+			dateOfBirth,
+			isWhatsappChecked,
+			isEmailChecked,
+			isSmsChecked,
+			documentType,
+			document,
+			serviceData.service.id,
+			dueDate,
+			selectedTime,
+			serviceData.service.duration,
+			reason,
+			serviceData.selectedProfessional,
+			name,
+			lastName,
+		);
 	};
 	return (
 		<div>
@@ -198,6 +217,7 @@ function ModalForm({
 										className='modal-footer__button modal-footer__button--update'
 										onClick={() => {
 											handleEditAppointment(idAppointment, setModalShow);
+											console.log(idAppointment);
 										}}
 									>
 										{t('Codes.buttons.Update')}

@@ -12,6 +12,7 @@ import { UseProfessionals } from '../../Hooks/Proffesionals/UseProfessionals';
 import { getCurrentDateFormatted } from '../../Helpers/DateHelper';
 import { useTranslation } from 'react-i18next';
 import { serviceContext } from '../../App';
+import { getStatusColor } from '../../Helpers/colorHelper';
 
 function DailyAppointments() {
 	const [t, i18n] = useTranslation('global');
@@ -134,7 +135,7 @@ function DailyAppointments() {
 										title: item.serviceName,
 										date: `${item.date}T${item.timeStart}`,
 										display: 'block',
-										color: '#54728c',
+										color: getStatusColor(item.status),
 										className: 'daily-calendar-container__appointments',
 									})),
 								]}

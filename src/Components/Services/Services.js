@@ -67,10 +67,7 @@ function Services({ setServiceData, setService }) {
 											{t('Codes.SelectProfessional')}
 										</option>
 										{professionals.map((opcion, index) => (
-											<option
-												key={opcion.id}
-												value={`${opcion.nameFirst} ${opcion.surnameFirst}`}
-											>
+											<option key={opcion.id} value={`${opcion.id} `}>
 												{opcion.nameFirst} {opcion.nameSecond}{' '}
 												{opcion.surnameFirst} {opcion.surnameSecond}
 											</option>

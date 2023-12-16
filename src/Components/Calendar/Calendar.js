@@ -16,6 +16,7 @@ import {
 	getYearMonthDay,
 	calculateAge,
 } from '../../Helpers/DateHelper.js';
+import { getStatusColor } from '../../Helpers/colorHelper';
 
 function Calendar({ serviceData }) {
 	const [t, i18n] = useTranslation('global');
@@ -36,7 +37,6 @@ function Calendar({ serviceData }) {
 	const [email, setEmail] = useState('');
 	const [status, setStatus] = useState('new');
 	const [idAppointment, setIdAppointment] = useState('');
-
 	const handleDateClick = arg => {
 		const fechaFormateada = getYearMonthDay(arg.date);
 		console.log(fechaFormateada);
@@ -89,6 +89,7 @@ function Calendar({ serviceData }) {
 		} else {
 			console.log('Este evento no es una cita');
 		}
+		console.log(eventClickInfo.event.extendedProps.array.status);
 	};
 
 	return (
@@ -126,7 +127,7 @@ function Calendar({ serviceData }) {
 										title: t('Codes.Busy'),
 										date: `${item.date}T${item.timeStart}`,
 										display: 'block',
-										color: '#54728c',
+										color: getStatusColor(item.status),
 										array: item,
 										className: 'calendar-container__appointments',
 									})),

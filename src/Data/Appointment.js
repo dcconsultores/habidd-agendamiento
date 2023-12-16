@@ -3,13 +3,16 @@ import axios from 'axios';
 export const handleCancelAppointment = (idAppointment, setModalShow) => {
 	const params = {
 		institution: 1,
-		service: 1,
-		id: { idAppointment },
+		service: 25,
+		id: 49,
 		status: 'canceled',
 	};
 
 	axios
-		.put('https://demo.habidd.com/api/scheduling/appointments/edit.php', params)
+		.delete(
+			'https://demo.habidd.com/api/scheduling/appointments/delete.php',
+			params,
+		)
 		.then(response => {
 			console.log('Solicitud PUT exitosa:', response.data);
 			setModalShow(false);
@@ -26,11 +29,14 @@ export const handleConfirmAppointment = (idAppointment, setModalShow) => {
 	const params = {
 		institution: 1,
 		service: 1,
-		id: { idAppointment },
+		id: idAppointment,
 		status: 'confirmed',
 	};
 	axios
-		.put('https://demo.habidd.com/api/scheduling/appointments/edit.php', params)
+		.post(
+			'https://demo.habidd.com/api/scheduling/appointments/confirm.php',
+			params,
+		)
 		.then(response => {
 			console.log('Solicitud PUT exitosa:', response.data);
 			setModalShow(false);
@@ -46,8 +52,8 @@ export const handleEditAppointment = (idAppointment, setModalShow) => {
 	const dataToUpdate = {
 		institution: 1,
 		service: 1,
-		id: { idAppointment },
-		date: '2023-01-01',
+		id: idAppointment,
+		date: '2023-12-25',
 		hour: '14:00:00',
 	};
 	axios
@@ -67,33 +73,55 @@ export const handleEditAppointment = (idAppointment, setModalShow) => {
 		});
 };
 
-export const handleCreateAppointment = (setModalShow, selectedPatient) => {
+export const handleCreateAppointment = (
+	setModalShow,
+	selectedPatient,
+	sendemail,
+	phoneNumber,
+	dateOfBirth,
+	isWhatsappChecked,
+	isEmailChecked,
+	isSmsChecked,
+	documentType,
+	document,
+	serviceid,
+	dueDate,
+	selectedTime,
+	durationTime,
+	reason,
+	selectedProfessional,
+	name,
+	lastName,
+) => {
+	const [firstName, secondName] = name.split(' ');
+	const [firstLastName, secondLastName] = lastName.split(' ');
 	const formData = {
 		institution: 1,
-		idType: 'CC',
-		idNumber: '12345678',
-		nameFirst: 'Juan',
-		nameSecond: 'Carlos',
-		surnameFirst: 'Gómez',
-		surnameSecond: 'López',
-		birthday: '1990-01-15',
-		phoneNumberMobile: 123456789,
-		email: 'juan.carlos@example.com',
-		contactedWhatsapp: true,
-		contactedEmail: false,
-		contactedSms: true,
+		idType: documentType,
+		idNumber: document,
+		nameFirst: firstName,
+		nameSecond: secondName,
+		surnameFirst: firstLastName,
+		surnameSecond: secondLastName,
+		birthday: dateOfBirth,
+		phoneNumberMobile: phoneNumber,
+		email: sendemail,
+		contactedWhatsapp: isWhatsappChecked,
+		contactedEmail: isEmailChecked,
+		contactedSms: isSmsChecked,
 		contactedPhone: false,
 	};
 	const appointmentData = {
 		institution: 1,
-		service: 25,
-		patient: 123,
-		professional: 456,
-		date: '2023-12-09',
-		hour: '09:00',
-		duration: 60,
-		notes: 'Consulta regular',
+		service: serviceid,
+		patient: selectedPatient,
+		professional: selectedProfessional,
+		date: dueDate,
+		hour: selectedTime,
+		duration: durationTime,
+		notes: reason,
 	};
+
 	// SI SE SELECCIONA UN NUEVO PACIENTE PRIMERO SE HACE LA PETICION DE CREAR PACIENTE Y LUEGO LA PETICION DE CREAR CITA
 	if (selectedPatient === 'nuevoPaciente') {
 		axios
@@ -103,6 +131,7 @@ export const handleCreateAppointment = (setModalShow, selectedPatient) => {
 			)
 			.then(response => {
 				console.log('Solicitud exitosa', response.data);
+				selectedPatient = response.data.data.id;
 				setModalShow(false);
 				console.log('PACIENTE CREADO');
 			})
@@ -143,4 +172,22 @@ export const handleCreateAppointment = (setModalShow, selectedPatient) => {
 				setModalShow(false);
 			});
 	}
+	console.log({
+		setModalShow,
+		selectedPatient,
+		sendemail,
+		phoneNumber,
+		dateOfBirth,
+		isWhatsappChecked,
+		isEmailChecked,
+		isSmsChecked,
+		documentType,
+		document,
+		serviceid,
+		dueDate,
+		selectedTime,
+		durationTime,
+		reason,
+		selectedProfessional,
+	});
 };

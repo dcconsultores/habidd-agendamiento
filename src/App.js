@@ -8,7 +8,6 @@ import CalendarAllServices from './Components/Calendar/CalendarAllServices.js';
 import PatientAppointment from './Components/Patient/PatientAppointments';
 import DailyAppointments from './Components/Calendar/DailyAppointments';
 export const serviceContext = React.createContext();
-export const serviceDataContext = React.createContext();
 
 function App() {
 	const [service, setService] = useState([]);
