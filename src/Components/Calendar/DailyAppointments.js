@@ -23,6 +23,7 @@ function DailyAppointments() {
 	const [selectedProfessional, setSelectedProfessional] = useState(
 		t('Codes.AllProfessionals'),
 	);
+	const [isCanceledChecked, setIsCanceledChecked] = useState(true);
 	const appointmentData = [
 		{
 			id: '1',
@@ -66,6 +67,9 @@ function DailyAppointments() {
 
 		return professionalFilter && serviceFilter;
 	});
+	const finalFilteredAppointments = isCanceledChecked
+		? filteredAppointments.filter(item => item.status !== 'CANCELED')
+		: filteredAppointments;
 	return (
 		<div>
 			<Container fluid>
@@ -117,6 +121,18 @@ function DailyAppointments() {
 									</Form>
 								</Col>
 							</Col>
+							<Col className='daily-calendar-container__canceled_filter'>
+								{' '}
+								<Form.Check
+									type='checkbox'
+									label={t('Codes.canceled_appointments')}
+									checked={!isCanceledChecked}
+									onChange={e => {
+										setIsCanceledChecked(!isCanceledChecked);
+										console.log(isCanceledChecked);
+									}}
+								/>
+							</Col>
 							<FullCalendar
 								locale={esLocale}
 								className='daily-calendar-container__fullcalendar'
@@ -131,7 +147,7 @@ function DailyAppointments() {
 										color: '#F2A654',
 										className: 'daily-calendar-container__Holidays',
 									})),
-									...filteredAppointments.map((item, index) => ({
+									...finalFilteredAppointments.map((item, index) => ({
 										title: item.serviceName,
 										date: `${item.date}T${item.timeStart}`,
 										display: 'block',

@@ -54,6 +54,7 @@
             "Update": "Actualizar",
             "Register": "Registrar",
             "Cancel": "Cancelar"
-        }
+        },
+        "canceled_appointments": "Mostrar citas canceladas"
     }
 }

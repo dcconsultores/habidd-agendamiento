@@ -101,3 +101,10 @@
 .fc-day-today {
 	background: #eaeaef !important;
 }
+.daily-calendar-container__canceled_filter {
+	display: flex;
+
+	justify-content: center;
+
+	gap: 10px;
+}
