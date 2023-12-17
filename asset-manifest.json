@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/habidd-agendamiento/static/css/main.627d2579.css",
+    "main.js": "/habidd-agendamiento/static/js/main.7d0f59c7.js",
+    "index.html": "/habidd-agendamiento/index.html",
+    "main.627d2579.css.map": "/habidd-agendamiento/static/css/main.627d2579.css.map",
+    "main.7d0f59c7.js.map": "/habidd-agendamiento/static/js/main.7d0f59c7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.627d2579.css",
+    "static/js/main.7d0f59c7.js"
+  ]
+}
