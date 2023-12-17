@@ -9,10 +9,7 @@ export const handleCancelAppointment = (idAppointment, setModalShow) => {
 	};
 
 	axios
-		.delete(
-			'https://demo.habidd.com/api/scheduling/appointments/delete.php',
-			params,
-		)
+		.delete(process.env.REACT_APP_DELETE_APPOINTMENT, params)
 		.then(response => {
 			console.log('Solicitud PUT exitosa:', response.data);
 			setModalShow(false);
@@ -33,10 +30,7 @@ export const handleConfirmAppointment = (idAppointment, setModalShow) => {
 		status: 'confirmed',
 	};
 	axios
-		.post(
-			'https://demo.habidd.com/api/scheduling/appointments/confirm.php',
-			params,
-		)
+		.post(process.env.REACT_APP_CONFIRM_APPOINTMENT, params)
 		.then(response => {
 			console.log('Solicitud PUT exitosa:', response.data);
 			setModalShow(false);
@@ -57,10 +51,7 @@ export const handleEditAppointment = (idAppointment, setModalShow) => {
 		hour: '14:00:00',
 	};
 	axios
-		.put(
-			'https://demo.habidd.com/api/scheduling/appointments/edit.php',
-			dataToUpdate,
-		)
+		.put(process.env.REACT_APP_EDIT_APPOINTMENT, dataToUpdate)
 		.then(response => {
 			console.log('Respuesta exitosa:', response.data);
 			setModalShow(false);
@@ -125,10 +116,7 @@ export const handleCreateAppointment = (
 	// SI SE SELECCIONA UN NUEVO PACIENTE PRIMERO SE HACE LA PETICION DE CREAR PACIENTE Y LUEGO LA PETICION DE CREAR CITA
 	if (selectedPatient === 'nuevoPaciente') {
 		axios
-			.post(
-				'  https://demo.habidd.com/api/scheduling/patients/create.php',
-				formData,
-			)
+			.post(process.env.REACT_APP_CREATE_PATIENT, formData)
 			.then(response => {
 				console.log('Solicitud exitosa', response.data);
 				selectedPatient = response.data.data.id;
@@ -141,10 +129,7 @@ export const handleCreateAppointment = (
 				console.log('PACIENTE CREADO');
 			});
 		axios
-			.post(
-				'https://demo.habidd.com/api/scheduling/appointments/create.php',
-				appointmentData,
-			)
+			.post(process.env.REACT_APP_CREATE_APPOINTMENT, appointmentData)
 			.then(response => {
 				console.log('Respuesta exitosa:', response.data);
 				console.log('CITA CREADO');
@@ -157,10 +142,7 @@ export const handleCreateAppointment = (
 			});
 	} else {
 		axios
-			.post(
-				'https://demo.habidd.com/api/scheduling/appointments/create.php',
-				appointmentData,
-			)
+			.post(process.env.REACT_APP_CREATE_APPOINTMENT, appointmentData)
 			.then(response => {
 				console.log('Respuesta exitosa:', response.data);
 				console.log('CITA CREADO');

@@ -24,32 +24,6 @@ function DailyAppointments() {
 		t('Codes.AllProfessionals'),
 	);
 	const [isCanceledChecked, setIsCanceledChecked] = useState(true);
-	const appointmentData = [
-		{
-			id: '1',
-			institution: '1',
-			service: '1',
-			patientId: '1',
-			date: '2024-01-01',
-			hourFrom: '09:00:00',
-			hourTo: '14:30:00',
-			reference: '1234567890',
-			professional: 'Jhon Doe',
-			status: 'Pendiente',
-		},
-		{
-			id: '1',
-			institution: '1',
-			service: '1',
-			patientId: '1',
-			date: '2023-01-01',
-			hourFrom: '10:00:00',
-			hourTo: '14:30:00',
-			reference: '1234567890',
-			professional: 'Jhon Doee',
-			status: 'Realizada',
-		},
-	];
 	const [selectedService, setSelectedService] = useState(
 		t('Codes.AllServices'),
 	);
@@ -57,16 +31,18 @@ function DailyAppointments() {
 	const filteredAppointments = allAppointments.filter(item => {
 		const professionalFilter =
 			!selectedProfessional ||
-			selectedProfessional === 'Todos los profesionales' ||
-			item.timeStart === selectedProfessional;
-
+			selectedProfessional === t('Codes.AllProfessionals') ||
+			parseInt(item.professional, 10) === parseInt(selectedProfessional, 10);
 		const serviceFilter =
 			!selectedService ||
-			selectedService === 'Todos los servicios' ||
+			selectedService === t('Codes.AllServices') ||
 			item.serviceName === selectedService;
 
 		return professionalFilter && serviceFilter;
 	});
+	useEffect(() => {
+		console.log(allAppointments);
+	}, []);
 	const finalFilteredAppointments = isCanceledChecked
 		? filteredAppointments.filter(item => item.status !== 'CANCELED')
 		: filteredAppointments;
@@ -85,15 +61,19 @@ function DailyAppointments() {
 										<Form.Group>
 											<Form.Select
 												value={selectedProfessional}
-												onChange={e => setSelectedProfessional(e.target.value)}
+												onChange={e => {
+													setSelectedProfessional(e.target.value);
+													console.log(e.target.value); // Move the console.log here
+												}}
 												className='services-container__select-professional'
 											>
 												<option value='Todos los profesionales'>
 													{t('Codes.AllProfessionals')}
 												</option>
-												{appointmentData.map((opcion, index) => (
-													<option key={opcion.id} value={`${opcion.hourFrom}`}>
-														{opcion.hourFrom}
+												{professionals.map((opcion, index) => (
+													<option key={opcion.id} value={`${opcion.id} `}>
+														{opcion.nameFirst} {opcion.nameSecond}{' '}
+														{opcion.surnameFirst} {opcion.surnameSecond}
 													</option>
 												))}
 											</Form.Select>
@@ -105,7 +85,10 @@ function DailyAppointments() {
 										<Form.Group>
 											<Form.Select
 												value={selectedService}
-												onChange={e => setSelectedService(e.target.value)}
+												onChange={e => {
+													setSelectedService(e.target.value);
+													console.log(selectedService);
+												}}
 												className='services-container__select-service'
 											>
 												<option value='Todos los servicios'>

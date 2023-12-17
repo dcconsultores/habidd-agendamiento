@@ -9,9 +9,13 @@ export const UseHolidays = serviceData => {
 	}, []);
 
 	function getHolidays() {
+		const params = {
+			institution: 1,
+		};
 		const options = {
 			method: 'GET',
-			url: `https://demo.habidd.com/api/scheduling/institutions/holidays.php?institution=${serviceData.id}`,
+			url: process.env.REACT_APP_SHOW_HOLIDAYS,
+			params,
 		};
 		axios
 			.request(options)

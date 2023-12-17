@@ -12,9 +12,14 @@ export const useAllAppointments = service => {
 	}, [service]);
 
 	function getAllAppointments(serviceId, serviceName) {
+		const params = {
+			institution: 1,
+			service: serviceId,
+		};
 		const options = {
 			method: 'GET',
-			url: `https://demo.habidd.com/api/scheduling/appointments/list.php?institution=1&service=${serviceId}`,
+			url: process.env.REACT_APP_SHOW_APPOINTMENTS,
+			params,
 		};
 		axios
 			.request(options)

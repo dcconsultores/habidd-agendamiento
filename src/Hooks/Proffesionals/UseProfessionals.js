@@ -4,9 +4,13 @@ import { useState, useEffect } from 'react';
 export const UseProfessionals = () => {
 	const [professionals, setProfessionals] = useState([]);
 	function getAllProfessionals() {
+		const params = {
+			institution: 1,
+		};
 		const options = {
 			method: 'GET',
-			url: `https://demo.habidd.com/api/scheduling/professionals/list.php?institution=${1}`,
+			url: process.env.REACT_APP_SHOW_PROFESSIONALS,
+			params,
 		};
 		axios
 			.request(options)

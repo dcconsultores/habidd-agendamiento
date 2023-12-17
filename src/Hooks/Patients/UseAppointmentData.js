@@ -8,9 +8,15 @@ export const UseAppointmentData = id => {
 	}, []);
 
 	function getAppointments() {
+		const params = {
+			institution: 1,
+			service: 1,
+			PatientId: 1,
+		};
 		const options = {
 			method: 'GET',
-			url: `https://demo.habidd.com/api/scheduling/appointments/search.php?institution=1&service=1&PatientId=${1}`,
+			url: process.env.REACT_APP_SEARCH_APPOINTMENTS,
+			params,
 		};
 		axios
 			.request(options)

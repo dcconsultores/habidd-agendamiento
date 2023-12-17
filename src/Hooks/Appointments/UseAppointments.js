@@ -4,9 +4,14 @@ import axios from 'axios';
 export const UseAppointments = () => {
 	const [appointments, setAppointments] = useState([]);
 	function getAppointments() {
+		const params = {
+			institution: 1,
+			service: 25,
+		};
 		const options = {
 			method: 'GET',
-			url: `https://demo.habidd.com/api/scheduling/appointments/list.php?institution=1&service=${25}`,
+			url: process.env.REACT_APP_SHOW_APPOINTMENTS,
+			params,
 		};
 		axios
 			.request(options)

@@ -8,9 +8,13 @@ export const UsePatients = () => {
 	}, []);
 
 	function getPatients() {
+		const params = {
+			institution: 1,
+		};
 		const options = {
 			method: 'GET',
-			url: `https://demo.habidd.com/api/scheduling/patients/list.php?institution=${1}`,
+			url: process.env.REACT_APP_SHOW_PATIENTS,
+			params,
 		};
 		axios
 			.request(options)
